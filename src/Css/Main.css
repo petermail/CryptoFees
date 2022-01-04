@@ -1,0 +1,58 @@
+
+html {
+  background-color: rgb(39, 39, 43);
+  color: white;
+  margin: 0 5px;
+}
+
+.header {
+    margin: 10px auto;
+    max-width: 800px;
+}
+.header a {
+    color: white;
+}
+.body {
+    margin: 10px auto;
+    max-width: 800px;
+}
+
+table {
+    border-collapse: collapse;
+}
+tr {
+    border: 0px;/*1px solid white;*/
+}
+td {
+    padding: 0 5px;
+}
+
+.flex {
+    display: flex;
+}
+.minMargin {
+    margin: 4px;
+}
+.gap {
+    margin: 0 6px;
+}
+.margin1 {
+    margin: 1px;
+}
+
+.chainTable {
+    columns: 100px 4;
+}
+.vCenter {
+    vertical-align: middle;
+}
+.h24 {
+    height: 24px;
+}
+.inline {
+    display: inline;
+}
+
+.hoverable:hover {
+    background-color: #666;
+}
