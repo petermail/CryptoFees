@@ -5,6 +5,8 @@ html {
   margin: 0 5px;
 }
 
+a { color: white; }
+a:hover { color:rgb(162, 162, 245); }
 .header {
     margin: 10px auto;
     max-width: 800px;
@@ -16,6 +18,33 @@ html {
     margin: 10px auto;
     max-width: 800px;
 }
+nav {
+    margin: 10px 0;
+}
+.menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.menu li {
+    background-color: #ccc;
+    padding: 10px 0;
+}
+.menu li a {
+    padding: 10px;
+    font-weight: bold;
+}
+.menu li:hover {
+    background-color: #eee;
+}
+.menu a {
+    color: #222;
+    text-decoration: none;
+}
+.active {
+    padding: 10px;
+    background-color: #8daaf5;
+}
 
 table {
     border-collapse: collapse;
@@ -25,6 +54,11 @@ tr {
 }
 td {
     padding: 0 5px;
+}
+
+hr {
+    border: 1 solid white;
+    margin: 4px;
 }
 
 .flex {
@@ -38,6 +72,15 @@ td {
 }
 .margin1 {
     margin: 1px;
+}
+.midPadding {
+    padding: 8px;
+}
+.bottom {
+    vertical-align: bottom;
+}
+.smallFont {
+    font-size: 10px;
 }
 
 .chainTable {
@@ -55,4 +98,17 @@ td {
 
 .hoverable:hover {
     background-color: #666;
+}
+
+.good {
+    background-color: #81B29A;
+    color: #222;
+}
+.bad {
+    background-color: #E07A5F;
+    color: #222;
+}
+.neutral {
+    background-color: #F2CC8F;
+    color: #222;
 }

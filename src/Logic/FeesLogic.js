@@ -1,7 +1,8 @@
 import { getCryptoComFeesAsync, getHuobiFeesAsync, getPricesAsync } from "./ServerLogic";
+import { BNB, ETH, LUNA } from './ConstLogic'
 
 var activeId = 0;
-const COINS = ["USDT", "USDC", "UST", "DAI", "BTC", "ETH", "SOL", "FTM", "AVAX", "MATIC", "DOT", "BNB", "LUNA", "XLM", "XMR", "CRO", "HT", "SHIB", "DOGE"];
+const COINS = ["USDT", "USDC", "UST", "DAI", "BTC", ETH, "SOL", "FTM", "AVAX", "MATIC", "DOT", BNB, LUNA, "XLM", "XMR", "CRO", "HT", "SHIB", "DOGE"];
 
 
 export const loadFeesAsync = async () => {

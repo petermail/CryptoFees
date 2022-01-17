@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import { Tile, Img } from './Tile'
 import { loadFeesAsync, loadPricesAsync } from '../Logic/FeesLogic'
 
@@ -33,9 +33,11 @@ export const Tiles = () => {
             </tr>
             <tr><td colSpan={4}><hr /></td></tr>
         </thead>
+        <tbody>
             { (coins && prices && coins.length > 0) &&
                 coins.map(x => <Tile key={x.id} {...x} prices={prices} />)
             }
+        </tbody>
         </table>
         </div>
     )

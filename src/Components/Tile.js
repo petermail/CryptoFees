@@ -5,15 +5,16 @@ export const Tile = (props) => {
     const { coin, data, prices } = props;
 
     return (
-        <tbody>
+        <>
             <tr>
                 <td rowSpan={data.length+1}>
                     <CoinImage coin={coin} />
                 </td>
             </tr>
             {data.map(x => <Chain key={x.id} coin={coin} prices={prices} {...x} />)}
-            <tr><td colSpan={4}><hr /></td></tr>
-        </tbody>
+            <tr><td colSpan={4}><hr /></td>
+            </tr>
+        </>
     )
 }
 
@@ -28,8 +29,8 @@ export const Chain = (props) => {
                 <CoinImage coin={chain} />
                 </div>
             </td>
-            <td>{ price && feeCrypto !== undefined ? Math.round(feeCrypto * price * 100) / 100 : ""}</td>
-            <td>{ price && feeHuobi !== undefined ? Math.round(feeHuobi * price * 100) / 100 : ""}</td>
+            <td>{ price && feeCrypto !== undefined ? "$" + Math.round(feeCrypto * price * 100) / 100 : ""}</td>
+            <td>{ price && feeHuobi !== undefined ? "$" + Math.round(feeHuobi * price * 100) / 100 : ""}</td>
         </tr>
     )
 }
