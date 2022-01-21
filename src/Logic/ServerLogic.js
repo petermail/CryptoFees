@@ -14,7 +14,8 @@ export const getPricesAsync = async () => {
     return await getServerFeesAsync(["price"]);
 }
 export const getGasAsync = async () => {
-    return await getServerFeesAsync(["etherscanGas", "polygonscanGas", "bscscanGas", "lunaGas"]);
+    return await getServerFeesAsync(["etherscanGas", "polygonscanGas", "bscscanGas", "lunaGas", 
+        "avaxGas", "ftmGas", "moonriverGas"]);
 }
 
 export const getHuobiCoins = (coins) => {

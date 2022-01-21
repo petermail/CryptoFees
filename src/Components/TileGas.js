@@ -26,9 +26,9 @@ const GasPrices = (props) => {
                     <td>fast</td>
                 </tr>
                 <tr>
-                    <td className="midPadding good">{gasSafe} <span class="smallFont">{gasUnit}</span></td>
-                    <td className="midPadding neutral">{gas} <span class="smallFont">{gasUnit}</span></td>
-                    <td className="midPadding bad">{gasFast} <span class="smallFont">{gasUnit}</span></td>
+                    <td className="midPadding good">{gasSafe} <span className="smallFont">{gasUnit}</span></td>
+                    <td className="midPadding neutral">{gas} <span className="smallFont">{gasUnit}</span></td>
+                    <td className="midPadding bad">{gasFast} <span className="smallFont">{gasUnit}</span></td>
                 </tr>
             </tbody>
         </table>
