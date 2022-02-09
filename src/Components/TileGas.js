@@ -38,7 +38,7 @@ const TransferPrices = (props) => {
     const { price, gas, gasSafe, gasFast, TOKEN_TRANSFER, DIVIDER } = props;
 
     const getGasUsd = (g) => {
-        if (g && price) {
+        if (g !== null && price) {
             return "$" + Math.round(g * price * TOKEN_TRANSFER * 100 / DIVIDER) / 100;
         }
     }

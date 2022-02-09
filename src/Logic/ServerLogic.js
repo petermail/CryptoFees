@@ -1,21 +1,21 @@
 import axios from "axios"
 
-export const getServerFeesAsync = async (names) => {
+export const getServerDataAsync = async (names) => {
     return await axios.post("https://fullbridge.wz.cz/CryptoFees/resend.php", { names: names });
 }
 
 export const getCryptoComFeesAsync = async () => {
-    return await getServerFeesAsync(["cryptoCom"]);
+    return await getServerDataAsync(["cryptoCom"]);
 }
 export const getHuobiFeesAsync = async (coins) => {
-    return await getServerFeesAsync(getHuobiCoins(coins));
+    return await getServerDataAsync(getHuobiCoins(coins));
 }
 export const getPricesAsync = async () => {
-    return await getServerFeesAsync(["price"]);
+    return await getServerDataAsync(["price"]);
 }
 export const getGasAsync = async () => {
-    return await getServerFeesAsync(["etherscanGas", "polygonscanGas", "bscscanGas", "lunaGas", 
-        "avaxGas", "ftmGas", "moonriverGas"]);
+    return await getServerDataAsync(["etherscanGas", "polygonscanGas", "bscscanGas", "lunaGas", 
+        "avaxGas", "ftmGas", "moonriverGas", "xmrGas"]);
 }
 
 export const getHuobiCoins = (coins) => {

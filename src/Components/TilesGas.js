@@ -10,6 +10,7 @@ export const TilesGas = () => {
     const [timeDiff, setTimeDiff] = useState("0 seconds");
     const [canReload, setCanReload] = useState(true);
     const ethPrice = useRef(0);
+    const xmrPrice = useRef(0);
     const timer = setTimeout(() => {
         calculateTime();
     }, 1000);;
@@ -21,6 +22,7 @@ export const TilesGas = () => {
         setCanReload(x => false);
         let g = await loadGasAsync();
         g.filter(x => x.chain === 'ETH')[0].price = ethPrice.current;
+        g.filter(x => x.chain === 'XMR')[0].price = xmrPrice.current;
         console.log(g);
         setGas(x => g);
         setReloadTime(x => new Date());
@@ -28,10 +30,12 @@ export const TilesGas = () => {
     }
     const localLoadPricesAsync = async () => {
         let p = await loadPricesAsync();
-        console.log(p);
+        //console.log(p);
         setPrices(x => p);
         let e = p.filter(x => x.coin === 'ETH')[0].price;
         ethPrice.current = e;
+        const xmrConst = 1000 / 65000; // Adjust price for further calculations
+        xmrPrice.current = p.filter(x => x.coin === 'XMR')[0].price * xmrConst;
         await localLoadGasAsync();
     }
 
@@ -73,6 +77,9 @@ export const TilesGas = () => {
         <tbody>
             { gas &&
                 gas.map(x => <TileGas key={x.id} {...x} />)
+            }
+            { (gas === null || gas.length === 0) &&
+                <div>Loading data...</div>
             }
         </tbody>
         </table>

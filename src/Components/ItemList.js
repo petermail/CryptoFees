@@ -4,7 +4,7 @@ export const ItemList = (props) => {
     
     return (<div>
         { items && items.length > 0 && 
-            items.map((x, i) => <>{x}{i < items.length - 1 ? "," : ""}</>)
+            items.map((x, i) => <span key={i}>{x}{i < items.length - 1 ? "," : ""}</span>)
         }
     </div>)
 }

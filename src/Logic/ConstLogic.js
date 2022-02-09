@@ -37,6 +37,8 @@ export const BUSD = "BUSD";
 export const HT = "HT";
 export const MATIC = "MATIC";
 export const AVAX = "AVAX";
+export const MOVR = "MOVR";
+export const CRO = "CRO";
 
 // APIs:
 // https://api-osmosis.imperator.co/pools/v1/all

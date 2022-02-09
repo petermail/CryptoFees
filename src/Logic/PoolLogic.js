@@ -1,8 +1,8 @@
-import { getServerFeesAsync } from "./ServerLogic";
+import { getServerDataAsync } from "./ServerLogic";
 import { FTM, USDC, USDT, ETH, BTC, BNB, MATIC, HT, AVAX } from './ConstLogic';
 
 export const getPoolsAsync = async () => {
-    const data = await getServerFeesAsync(
+    const data = await getServerDataAsync(
         ["autoBnb", "autoFtm", "autoHt", "autoAvax"]);
     return [processAutofarmData(data.data[0], BNB), 
         processAutofarmData(data.data[1], FTM),
