@@ -8,8 +8,6 @@ const COINS = ["USDT", "USDC", "UST", "DAI", "BTC", ETH, "SOL", "FTM", "AVAX", "
 export const loadFeesAsync = async () => {
     let result = await loadHuobiDataAsync(COINS);
     let res = await loadCryptoComDataAsync();
-    console.log("Fees:");
-    console.log(res);
     //result.push(...res);
     //return result;
     return combineFeeLists(result, res);
@@ -19,7 +17,6 @@ const combineFeeLists = (listH, listC) => {
     for (let i = 0; i < result.length; ++i) {
         let found = listC.filter(x => x.coin === result[i].coin);
         if (found && found[0]) {
-            console.log(found[0]);
             for (let j = 0; j < found[0].data.length; ++j) {
                 let found2 = listH[i].data.filter(x => x.chain === found[0].data[j].chain);
                 if (found2 && found2[0]) {

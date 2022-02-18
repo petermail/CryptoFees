@@ -22,7 +22,6 @@ const processAutofarmData = (data, chain) => {
             }
         }
     }
-    console.log(result);
     return { chain: chain, pools: result };
 }
 

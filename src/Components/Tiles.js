@@ -12,12 +12,12 @@ export const Tiles = () => {
     }, []);
     const localLoadFeesAsync = async () => {
         let c = await loadFeesAsync();
-        console.log(c);
+        //console.log(c);
         setCoins(x => c);
     }
     const localLoadPricesAsync = async () => {
         let p = await loadPricesAsync();
-        console.log(p);
+        //console.log(p);
         setPrices(x => p);
     }
 

@@ -18,12 +18,18 @@ export const getGasAsync = async () => {
         "avaxGas", "ftmGas", "moonriverGas", "xmrGas"]);
 }
 
+export const getCurrentInflationAsync = async () => {
+    return await getServerDataAsync(["inflation"]);
+}
+export const getInflationAsync = async () => {
+    return await axios.get("https://fullbridge.wz.cz/CryptoFees/select.php?table=inflation&columns=timestamp,data&where=id%20%3E%201%20ORDER%20BY%20id%20DESC%20LIMIT%201");
+}
+
 export const getHuobiCoins = (coins) => {
     let result = [];
     for (let i = 0; i < coins.length; ++i) {
         result.push(getHuobiOneCoin(coins[i]));
     }
-    console.log(result);
     return result;
 }
 export const getHuobiOneCoin = (coin) => {
