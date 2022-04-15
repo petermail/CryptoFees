@@ -6,8 +6,10 @@ import { Bridges } from './Bridges'
 import { Pools } from './Pools'
 import { Inflation } from './Inflation'
 import { TokenAmounts } from './TokenAmounts'
+import { Links } from './Links'
 
 import '../Css/Main.css';
+import { Chains } from './Chains'
 
 export const Main = () => {
 
@@ -23,6 +25,8 @@ export const Main = () => {
                         <Route path="/pool" element={<Pools />} />
                         <Route path="/stablecoins" element={<TokenAmounts />} />
                         <Route path="/inflation" element={<Inflation />} />
+                        <Route path="/chain-data" element={<Chains />} />
+                        <Route path="/links" element={<Links />} />
                     </Route>
                 </Routes>
             </HashRouter>
@@ -34,7 +38,7 @@ export const MainMenu = () => {
 
     return (<div>
         <nav>
-            <ul className="menu flex">
+            <ul className="menu flex wrap">
                 <li>
                     <NavLink to="/">Withdraw fees</NavLink>
                 </li>
@@ -52,6 +56,12 @@ export const MainMenu = () => {
                 </li>
                 <li>
                     <NavLink to="/inflation">Inflation</NavLink>
+                </li>
+                <li>
+                    <NavLink to="/chain-data">Chain</NavLink>
+                </li>
+                <li>
+                    <NavLink to="/links">Links</NavLink>
                 </li>
             </ul>
         </nav>

@@ -50,7 +50,7 @@ export const loadPricesAsync = async () => {
 
 export const loadCryptoComDataAsync = async () => {
     let res = await getCryptoComFeesAsync();
-    console.log(res.data[0].data.symbols);
+    //console.log(res.data[0].data.symbols);
     return convertServerCryptoCom(res.data[0].data.symbols);
 }
 
@@ -59,7 +59,7 @@ export const loadHuobiDataAsync = async (coins) => {
     //const val = await axios.get(url);
     //console.log(val.data);
     let res = await getHuobiFeesAsync(coins);
-    console.log(res);
+    //console.log(res);
     let result = [];
     for (let i = 0; i < res.data.length; ++i) {
         result.push(processHuobiData(res.data[i]));
@@ -90,12 +90,22 @@ const fixHuobiName = (name) => {
         return "LUNA";
     } else if (name === "CCHAIN") {
         return "AVAXC";
+    } else if (name === "BEP20BTCB") {
+        return "BEP20";
+    } else if (name === "BSC") {
+        return "BEP20";
+    } else if (name === "BEP20DOT") {
+        return "BEP20";
+    } else if (name === "ERC20") {
+        return "ETH";
     }
     return name;
 }
 const fixCryptoComName = (name) => {
     if (name === "ERC20"){
         return "ETH";
+    } else if (name === "AVAXC USDC.e") {
+        return "AVAXC";
     }
     return name;
 }

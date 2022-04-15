@@ -19,25 +19,31 @@ export const Inflation = () => {
         <div>
             <table>
                 <thead>
-                    <tr><td>Network</td><td>Inflation per year</td></tr>
-                    <tr><td colSpan={2}><hr /></td></tr>
+                    <tr><td>Network</td><td>Inflation per year</td><td>Recent inflation per year</td></tr>
+                    <tr><td colSpan={3}><hr /></td></tr>
                 </thead>
                 <tbody>
-                    { inflation && inflation.filter(x => x.inflation).map(x =>
+                    { inflation && inflation.filter(x => x.inflation || x.inflation2).map(x =>
                         <InflationItem key={x.Coin} {...x} />
                     )}
+                    { (inflation === null || inflation.length === 0) &&
+                        <tr><td colSpan={3}><div>Loading data...</div></td></tr>
+                    }
                 </tbody>
             </table>
+            <br />
+            Inflation is calculated based on <a href="https://www.coingecko.com">CoinGecko</a> circulating supply data change in few months annualized to the whole year. The two columns show (first) long term inflation and (second) short term recent inflation. Short term inflation can be more impacted by rare updates of circulating supply data.
         </div>
     )
 }
 
 const InflationItem = (props) => {
-    const { Coin, inflation } = props;
+    const { Coin, inflation, inflation2 } = props;
     return (
         <tr className="hoverable">
             <td><CoinImage coin={convCoinName(Coin)} /></td>
-            <td>{Math.round(inflation * 10)/10} %</td>
+            <td>{inflation ? `${Math.round(inflation * 10)/10} %` : ''}</td>
+            <td>{Math.round(inflation2 * 10)/10} %</td>
         </tr>
     )
 }

@@ -112,3 +112,7 @@ hr {
     background-color: #F2CC8F;
     color: #222;
 }
+.wrap {
+    flex-wrap: wrap;
+    display: flex;
+}

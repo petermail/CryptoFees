@@ -1,4 +1,4 @@
-import { convCoinName } from "../Logic/ConstLogic";
+import { convCoinName, splitCoinNames } from "../Logic/ConstLogic";
 
 
 export const Tile = (props) => {
@@ -37,20 +37,28 @@ export const Chain = (props) => {
 
 export const CoinImage = (props) => {
     const { coin } = props;
-    //const coinName = convCoinName(coin);
+    const coinName = convCoinName(coin);
+    const coinNames = splitCoinNames(coinName);
 
-    return (
-        <div className="flex margin1">
-            <Img coin={coin} />
-            <div className="gap">{coin}</div>
-        </div>
-    )
+    if (coinNames.length > 1) {
+        return (
+            <div className="flex margin1">
+                { coinNames.map(x => (<Img key={x} coin={convCoinName(x)} />)) }
+                <div className="gap">{coinName}</div>
+            </div>
+        );
+    } else 
+        return (
+            <div className="flex margin1">
+                <Img coin={coinName} />
+                <div className="gap">{coinName}</div>
+            </div>
+        )
 }
 export const Img = (props) => {
     const { coin } = props;
-    const coinName = convCoinName(coin);
 
     return (
-        <img src={process.env.PUBLIC_URL + "/Images/" + coinName + ".png"} alt="" height={24} /> 
+        <img src={process.env.PUBLIC_URL + "/Images/" + coin + ".png"} alt="" height={24} /> 
     )
 }
