@@ -116,3 +116,6 @@ hr {
     flex-wrap: wrap;
     display: flex;
 }
+.hand {
+    cursor: pointer;
+}

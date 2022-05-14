@@ -11,9 +11,10 @@ export const Tiles = () => {
         localLoadPricesAsync();
     }, []);
     const localLoadFeesAsync = async () => {
-        let c = await loadFeesAsync();
+        //let c = await loadFeesAsync();
         //console.log(c);
-        setCoins(x => c);
+        //setCoins(x => c);
+        loadFeesAsync(c => setCoins(x => c));
     }
     const localLoadPricesAsync = async () => {
         let p = await loadPricesAsync();
@@ -30,8 +31,9 @@ export const Tiles = () => {
                 <td>Network</td>
                 <td>Fee in USD<br />on Crypto.com <Img coin="CRO" /></td>
                 <td>Fee in USD<br />on Huobi <Img coin="HT" /></td>
+                <td>Fee in USD<br />on CoinEx <Img coin="CET" /></td>
             </tr>
-            <tr><td colSpan={4}><hr /></td></tr>
+            <tr><td colSpan={5}><hr /></td></tr>
         </thead>
         <tbody>
             { (coins && prices && coins.length > 0) &&

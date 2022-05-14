@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react'
-import { CoinImage } from "./Tile"
-import { getUsdAsync } from '../Logic/TokenLogic';
+import { CoinImage, Img } from "./Tile"
+import { getCurveAsync, getUsdAsync } from '../Logic/TokenLogic';
+import { Table } from './Table';
+import { BUSD, DAI, FRAX, MIM, USDC, USDT, UST } from '../Logic/ConstLogic';
 
 export const TokenAmounts = () => {
     const [tokens, setTokens] = useState([]);
+    const [curve, setCurve] = useState([]);
 
     useEffect(() => {
         loadTokensAsync();
@@ -11,10 +14,13 @@ export const TokenAmounts = () => {
     const loadTokensAsync = async () => {
         const u = await getUsdAsync();
         setTokens(x => u);
+        const c = await getCurveAsync();
+        setCurve(x => c);
     }
 
     return (
         <div>
+            <div className="flex">
             <table>
                 <thead>
                     <tr>
@@ -37,6 +43,14 @@ export const TokenAmounts = () => {
                     }
                 </tbody>
             </table>
+            <div>
+                <Table headers={["Stablecoin", "Type"]} rows={[[<CoinImage coin={USDC} />, "centralized"], [<CoinImage coin={USDT} />, "centralized"], 
+                    [<CoinImage coin={BUSD} />, "centralized"], [<CoinImage coin={DAI} />, "decentralized"], [<CoinImage coin={MIM} />, "decentralized"], 
+                    [<CoinImage coin={FRAX} />, "decentralized"], [<CoinImage coin={UST} />, "de-pegged"]]}>
+                </Table>
+                <CurvePool data={curve} />
+            </div>
+            </div>
             <br />
             <div>
                 Some stablecoin amount can be counted twice because token can be locked on one network and equivalent created on other. E.g. tokens can be locked on Ethereum network in a bridge contract and new token is created on Solana with backing of the original tokens on Ethereum.
@@ -55,5 +69,20 @@ const TokenAmount = (props) => {
             <td><CoinImage coin={coin} /></td>
             <td>{bridge}</td>
         </tr>
+    )
+}
+
+const CurvePool = (props) => {
+    const { data } = props;
+
+    const makeRows = (items) => {
+        return items.length === 0 ? [["", "loading data"]] 
+        : items.map(x => ([<CoinImage key={x.name} coin={x.name} />, 
+            "$"+Math.round(x.amount).toLocaleString(undefined),
+            Math.round(x.perc*100) + "%"]));
+    }
+
+    return (
+        <Table superheader={"Curve stable pool on Ethereum"} headers={["Coin", "Amount", "%"]} rows={makeRows(data)} />
     )
 }

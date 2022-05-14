@@ -11,6 +11,8 @@ export const TilesGas = () => {
     const [canReload, setCanReload] = useState(true);
     const ethPrice = useRef(0);
     const xmrPrice = useRef(0);
+    const croPrice = useRef(0);
+    const canResetTime = useRef(false);
     const timer = setTimeout(() => {
         calculateTime();
     }, 1000);;
@@ -20,13 +22,28 @@ export const TilesGas = () => {
     }, []);
     const localLoadGasAsync = async () => {
         setCanReload(x => false);
-        let g = await loadGasAsync();
-        g.filter(x => x.chain === 'ETH')[0].price = ethPrice.current;
-        g.filter(x => x.chain === 'XMR')[0].price = xmrPrice.current;
-        console.log(g);
-        setGas(x => g);
-        setReloadTime(x => new Date());
-        setCanReload(x => true);
+        canResetTime.current = true;
+        loadGasAsync(g => {
+            updateChainPrice(g, 'ETH', ethPrice.current);
+            updateChainPrice(g, 'Arbitrum', ethPrice.current);
+            updateChainPrice(g, 'XMR', xmrPrice.current);
+            updateChainPrice(g, 'LUNA', 1000/65);
+            updateChainPrice(g, 'CRO', croPrice.current);
+            //console.log(g);
+            setGas(x => g);
+            if (canResetTime.current) {
+                setReloadTime(x => new Date());
+            }
+        }, () => {
+            setCanReload(x => true);
+            canResetTime.current = false;
+        });
+    }
+    const updateChainPrice = (gases, chain, price) => {
+        const gas = gases.filter(x => x.chain === chain)[0];
+        if(gas){
+            gas.price = price;
+        }
     }
     const localLoadPricesAsync = async () => {
         let p = await loadPricesAsync();
@@ -36,6 +53,7 @@ export const TilesGas = () => {
         ethPrice.current = e;
         const xmrConst = 1000 / 65000; // Adjust price for further calculations
         xmrPrice.current = p.filter(x => x.coin === 'XMR')[0].price * xmrConst;
+        croPrice.current = p.filter(x => x.coin === 'CRO')[0].price;
         await localLoadGasAsync();
     }
 
@@ -79,7 +97,7 @@ export const TilesGas = () => {
                 gas.map(x => <TileGas key={x.id} {...x} />)
             }
             { (gas === null || gas.length === 0) &&
-                <div>Loading data...</div>
+                <tr><td colSpan={2}><div>Loading data...</div></td></tr>
             }
         </tbody>
         </table>

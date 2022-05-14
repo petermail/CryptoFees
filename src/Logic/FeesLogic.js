@@ -1,24 +1,41 @@
-import { getCryptoComFeesAsync, getHuobiFeesAsync, getPricesAsync } from "./ServerLogic";
+import { getCoinExFeesAsync, getCryptoComFeesAsync, getHuobiFeesAsync, getPricesAsync } from "./ServerLogic";
 import { BNB, ETH, LUNA } from './ConstLogic'
 
 var activeId = 0;
-const COINS = ["USDT", "USDC", "UST", "DAI", "BTC", ETH, "SOL", "FTM", "AVAX", "MATIC", "DOT", BNB, LUNA, "XLM", "XMR", "CRO", "HT", "SHIB", "DOGE"];
+const COINS = ["USDT", "USDC", "DAI", "BTC", ETH, "SOL", "FTM", "AVAX", "MATIC", "DOT", BNB, LUNA, 
+    "XLM", "XMR", "CRO", "HT", "SHIB", "DOGE", "SCRT", "MOVR", "GLMR", "NEAR", "AURORA"]; // "RUNE" add it when it is used on Huobi exchange
+    //"UST" removed because unknown value
 
 
-export const loadFeesAsync = async () => {
-    let result = await loadHuobiDataAsync(COINS);
-    let res = await loadCryptoComDataAsync();
+export const loadFeesAsync = async (onUpdate) => {
+    const resHuobi = await loadHuobiDataAsync(COINS);
+    if (onUpdate) {
+        onUpdate(resHuobi);
+    }
+
+    const resCryptoCom = await loadCryptoComDataAsync();
+    //console.log(resCoinEx);
     //result.push(...res);
     //return result;
-    return combineFeeLists(result, res);
+    const res = combineFeeLists(resHuobi, resCryptoCom);
+
+    if (onUpdate){
+        onUpdate(res);
+        const resCoinEx = await loadCoinExDataAsync();
+        const result = mergeCoinExFeeList(res, resCoinEx);
+        //console.log(result);
+        onUpdate([ ...result ]);
+    }
+    //const result = mergeCoinExFeeList(res, resCoinEx);
+    //return result;
 }
 const combineFeeLists = (listH, listC) => {
     let result = listH;
     for (let i = 0; i < result.length; ++i) {
-        let found = listC.filter(x => x.coin === result[i].coin);
+        const found = listC.filter(x => x.coin === result[i].coin);
         if (found && found[0]) {
             for (let j = 0; j < found[0].data.length; ++j) {
-                let found2 = listH[i].data.filter(x => x.chain === found[0].data[j].chain);
+                const found2 = listH[i].data.filter(x => x.chain === found[0].data[j].chain);
                 if (found2 && found2[0]) {
                     for (let k = 0; k < listH[i].data.length; ++k) {
                         if (listH[i].data[k].chain === found[0].data[j].chain) {
@@ -27,7 +44,7 @@ const combineFeeLists = (listH, listC) => {
                         }
                     }
                 } else {
-                    let newItem = found[0].data[j];
+                    const newItem = found[0].data[j];
                     newItem.id = listH[i].data.length;
                     result[i].data.push(newItem);
                 }
@@ -38,20 +55,41 @@ const combineFeeLists = (listH, listC) => {
     }
     return result;
 }
+const mergeCoinExFeeList = (list, listCo) => {
+    for (let i = 0; i < list.length; ++i) {
+        const found = listCo.filter(x => x.coin === list[i].coin);
+        if (found && found[0] && found[0].data) {
+            for (let j = 0; j < list[i].data.length; ++j) {
+                const found2 = found[0].data.filter(x => x.chain === list[i].data[j].chain);
+                if (found2 && found2[0]) {
+                    list[i].data[j].feeCoinEx = found2[0].feeCoinEx;
+                }
+            }
+        }
+    }
+    return list;
+}
 
 export const loadPricesAsync = async () => {
-    let data = await getPricesAsync();
+    const data = await getPricesAsync();
+    const mergedData = { ...data.data[0], ...data.data[1] };
     //console.log("prices:");
-    //console.log(data.data[0]);
-    let result = [{coin: "USDT", price: 1.0}, {coin: "USDC", price: 1.0}, {coin: "DAI", price: 1.0}, {coin: "UST", price: 1.0}];
-    result.push(...convertServerPrices(data.data[0]));
+    //console.log(mergedData);
+    const result = [{coin: "USDT", price: 1.0}, {coin: "USDC", price: 1.0}, {coin: "DAI", price: 1.0}];
+    result.push(...convertServerPrices(mergedData));
+
     return result;
 }
 
 export const loadCryptoComDataAsync = async () => {
-    let res = await getCryptoComFeesAsync();
+    const res = await getCryptoComFeesAsync();
     //console.log(res.data[0].data.symbols);
     return convertServerCryptoCom(res.data[0].data.symbols);
+}
+
+export const loadCoinExDataAsync = async () => {
+    const res = await getCoinExFeesAsync();
+    return convertServerCoinEx(res.data[0].data.config);
 }
 
 export const loadHuobiDataAsync = async (coins) => {
@@ -88,7 +126,7 @@ const fixHuobiName = (name) => {
         return "Polygon";
     } else if (name === "TERRA") {
         return "LUNA";
-    } else if (name === "CCHAIN") {
+    } else if (name === "CCHAIN" || name === "AVAXCCHAIN") {
         return "AVAXC";
     } else if (name === "BEP20BTCB") {
         return "BEP20";
@@ -109,13 +147,51 @@ const fixCryptoComName = (name) => {
     }
     return name;
 }
+const fixCoinExName = (name) => {
+    if (name === "ERC20") {
+        return "ETH";
+    } else if (name === "TRC20") {
+        return "TRX";
+    } else if (name === "BSC") {
+        return "BEP20";
+    } else if (name === "MATIC") {
+        return "Polygon";
+    } else if (name === "AVA_C") {
+        return "AVAXC";
+    } else if (name === "AVA") {
+        return "AVAX";
+    }
+    return name;
+}
+const convertServerCoinEx = (data) => {
+    const result = [];
+    let res = null;
+    let activeCoin = null;
+    let i = 0;
+    for (let key in data) {
+        const index = key.indexOf('-');
+        const firstPart = index === -1 ? key : key.substring(0, index);
+        if (activeCoin !== firstPart){
+            if (res) {
+                result.push(res);
+            }
+            res = { id: ++activeId, coin: firstPart, data: [] };
+        }
+        const chain = fixCoinExName(key.substring(index + 1));
+        const fee = parseFloat(data[key].withdraw_tx_fee);
+        res.data.push({ id: ++i, chain: chain, feeCoinEx: fee });
+        activeCoin = firstPart;
+    }
+    if (res) { result.push(res); }
+    return result;
+}
 const convertServerCryptoCom = (symbols) => {
-    let result = [];
+    const result = [];
     for (let i = 0; i < COINS.length; ++i) {
-        let nets = symbols[COINS[i]]?.networks;
-        let res = { id: ++activeId, coin: COINS[i], data: [] };
+        const nets = symbols[COINS[i]]?.networks;
+        const res = { id: ++activeId, coin: COINS[i], data: [] };
         for (let j = 0; j < nets?.length ?? 0; ++j) {
-            let fee = parseFloat(nets[j].withdrawalFees);
+            const fee = parseFloat(nets[j].withdrawalFees);
             let chain = nets[j].networkDisplayName ?? nets[j].network;
             chain = fixCryptoComName(chain);
             res.data.push({ id: j, chain: chain, feeCrypto: fee });
@@ -125,12 +201,14 @@ const convertServerCryptoCom = (symbols) => {
     return result;
 }
 const convertServerPrices = (prices) => {
-    let result = [];
-    let pairs = [["stellar", "XLM"], ["terra-luna", "LUNA"], ["bitcoin", "BTC"],
+    const result = [];
+    const pairs = [["stellar", "XLM"], ["terra-luna", "LUNA"], ["bitcoin", "BTC"],
         ["matic-network", "MATIC"], ["polkadot", "DOT"], ["ethereum", "ETH"], 
         ["binancecoin", "BNB"], ["solana", "SOL"], ["avalanche-2", "AVAX"], 
         ["fantom", "FTM"], ["crypto-com-chain", "CRO"], ["monero", "XMR"], 
-        ["huobi-token", "HT"], ["shiba-inu", "SHIB"], ["dogecoin", "DOGE"]];
+        ["huobi-token", "HT"], ["shiba-inu", "SHIB"], ["dogecoin", "DOGE"],
+        ["secret", "SCRT"], ["moonriver", "MOVR"], ["moonbeam", "GLMR"], 
+        ["thorchain", "RUNE"], ["near", "NEAR"], ["aurora-near", "AURORA"]];
     for (let i = 0; i < pairs.length; ++i) {
         convertCoinPrivate(prices[pairs[i][0]], pairs[i][1], result);
     }

@@ -1,4 +1,4 @@
-import { AURORA, AVAX, Axelar, BNB, CRO, ETH, FTM, GLMR, HECO, MATIC, MOVR, SOL, USDC, USDT, UST, Wormhole } from "./ConstLogic";
+import { AURORA, AVAX, Axelar, BNB, CRO, ETH, FTM, GLMR, HECO, HT, MATIC, MOVR, SOL, USDC, USDT, UST, Wormhole } from "./ConstLogic";
 
 export const getChains = () => {
     const result = [
@@ -13,6 +13,7 @@ export const getChains = () => {
         createChain(USDC, CRO, "0xc21223249ca28397b4b6541dffaecc539bff0c59"),
         createChain(USDC, GLMR, "0x818ec0a7fe18ff94269904fced6ae3dae6d6dc0b"),
         createChain(USDC, "Arbitrum", "0xff970a61a04b1ca14834a43f5de4533ebddb5cc8"),
+        createChain(USDC, HT, "0x9362bbef4b8313a8aa9f0c9808b80577aa26b73b"),
 
         createChain(USDT, ETH, "0xdac17f958d2ee523a2206206994597c13d831ec7"),
         createChain(USDT, BNB, "0x55d398326f99059ff775485246999027b3197955"),
@@ -25,7 +26,7 @@ export const getChains = () => {
         createChain(USDT, CRO, "0x66e428c3f67a68878562e79a0234c1f83c208770"),
         createChain(USDT, GLMR, "0xefaeee334f0fd1712f9a8cc375f427d9cdd40d73"),
         createChain(USDT, "Arbitrum", "0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9"),
-        createChain(USDT, HECO, "0xa71edc38d189767582c38a3145b5873052c3e47a"),
+        createChain(USDT, HT, "0xa71edc38d189767582c38a3145b5873052c3e47a"),
 
         createChain(UST, ETH, "0xa47c8bf37f92abed4a126bda807a7b7498661acd"),
         createChain(UST, BNB, "0x23396cf899ca06c4472205fc903bdb4de249d6fc"),

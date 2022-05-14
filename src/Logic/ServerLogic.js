@@ -4,6 +4,9 @@ export const getServerDataAsync = async (names) => {
     return await axios.post("https://fullbridge.wz.cz/CryptoFees/resend.php", { names: names });
 }
 
+export const getCoinExFeesAsync = async () => {
+    return await getServerDataAsync(["coinex"]);
+}
 export const getCryptoComFeesAsync = async () => {
     return await getServerDataAsync(["cryptoCom"]);
 }
@@ -11,11 +14,11 @@ export const getHuobiFeesAsync = async (coins) => {
     return await getServerDataAsync(getHuobiCoins(coins));
 }
 export const getPricesAsync = async () => {
-    return await getServerDataAsync(["price"]);
+    return await getServerDataAsync(["price", "price2"]);
 }
 export const getGasAsync = async () => {
     return await getServerDataAsync(["etherscanGas", "polygonscanGas", "bscscanGas", "lunaGas", 
-        "avaxGas", "ftmGas", "moonriverGas", "xmrGas"]);
+        "avaxGas", "ftmGas", "moonriverGas", "xmrGas", "hecoinfoGas", "croGas", "arbGas"]);
 }
 
 export const getCurrentInflationAsync = async () => {

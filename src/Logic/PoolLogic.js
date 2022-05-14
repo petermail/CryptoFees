@@ -4,12 +4,11 @@ import { FTM, USDC, USDT, ETH, BTC, BNB, MATIC, HT, AVAX, GLMR, AURORA } from '.
 export const getPoolsAsync = async (onFinish) => {
     let fullResult = [];
     getServerDataAsync(
-        ["autoBnb", "autoFtm", "autoHt", "autoAvax", "autoMatic"]).then(x => {
+        ["autoBnb", "autoFtm", "autoHt", "autoAvax"]).then(x => {
             const result = { farm: 'Autofarm', data: [processAutofarmData(x.data[0], BNB), 
                 processAutofarmData(x.data[1], FTM),
                 processAutofarmData(x.data[2], HT),
-                processAutofarmData(x.data[3], AVAX),
-                processAutofarmData(x.data[4], MATIC)] };
+                processAutofarmData(x.data[3], AVAX)] };
             fullResult.push(result);
             //console.log(fullResult);
             onFinish(fullResult);
@@ -79,6 +78,10 @@ const processTitleBeefy = (name) => {
         return 'USTW-USDC-USDT';
     } else if (name === 'sushi-mr-frax-usdc') {
         return 'FRAX-USDC';
+    } else if (name === 'rose-ust-3pool') {
+        return 'UST-USDT-USDC-DAI';
+    } else if(name === 'solarbeam-frax-3pool') {
+        return 'FRAX-USDC-BUSD-USDT';
     } else if (name.indexOf('stargate') === 0) {
         return name.substring(name.lastIndexOf('-') + 1).toUpperCase();
     } else return name.substring(name.indexOf('-') + 1).toUpperCase();
@@ -109,6 +112,7 @@ const getBeefyChain = (title) => {
         case 'beamswap-usdc-usdt':
         case 'beamswap-dai-usdc':
         case 'sushi-mr-frax-usdc':
+        case 'solarbeam-frax-3pool':
         case 'stellaswap-dai-usdc': return GLMR;
         case 'spell-ftm-mim-crv':
         case 'scream-mim':
@@ -117,6 +121,7 @@ const getBeefyChain = (title) => {
         case 'stargate-fantom-usdt':
         case 'stargate-fantom-usdc':
         case 'spirit-mim-usdc': return FTM;
+        case 'rose-ust-3pool':
         case 'trisolaris-usdt-usdc': return AURORA;
         case 'spell-mim-crv': return "Arbitrum";
         default: return null;
@@ -128,5 +133,5 @@ const filterBeefyData = (name) => {
         "mim-usdc.e", "ust-usdc", "usdc-busd", "mim-usdc",
         "mim-crv", "ftm-mim-crv", "mim", "usdc", "usdt", "dai", 
         "avax-usdc", 'avax-usdt', 'fantom-usdc', 'fantom-usdt',
-        'avax-f-3pool', 'mr-frax-usdc'].includes(sub);
+        'avax-f-3pool', 'mr-frax-usdc', 'ust-3pool', 'frax-3pool'].includes(sub);
 }

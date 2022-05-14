@@ -26,6 +26,7 @@ export const getScansToken = (chain, token) => {
         case GLMR: return "https://moonscan.io/token/" + token + "?a=" + token;
         case "Arbitrum": return "https://arbiscan.io/token/" + token + "?a=" + token;
         case AURORA: return "https://explorer.mainnet.aurora.dev/token/" + token + "/token-transfers";
+        case HT: return "https://hecoinfo.com/token/" + token;
         default: return null;
     }
 }
@@ -39,8 +40,8 @@ export const convCoinName = (name) => {
         case "BEP20": return "BNB";
         case "Huobi Token":
         case "HECO": return "HT";
-        case "Avalanche":
-        case "AVAXC": return AVAX;
+        case "Avalanche": return AVAX;
+        //case "AVAXC": return AVAX;
         case "USDT.e":
         case "ibUSDT":
         case "S*USDT":
@@ -80,6 +81,7 @@ export const convCoinName = (name) => {
         case "JOE": return "JOE";
         case "Spookyswap": return "BOO";
         case "Astroport": return "ASTRO";
+        case "Orca": return "ORCA";
 
         default: return name;
     }
@@ -98,6 +100,7 @@ export const FTM = "FTM";
 export const USDC = "USDC";
 export const USDT = "USDT";
 export const BUSD = "BUSD";
+export const DAI = "DAI";
 export const HT = "HT";
 export const MATIC = "MATIC";
 export const AVAX = "AVAX";
@@ -114,6 +117,8 @@ export const AURORA = "AURORA";
 export const ALGO = "ALGO";
 export const HECO = "HECO";
 export const FRAX = "FRAX";
+export const NEAR = "NEAR";
+export const MIM = "MIM";
 
 
 export const Wormhole = "Wormhole";
