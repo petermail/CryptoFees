@@ -82,6 +82,7 @@ export const convCoinName = (name) => {
         case "Spookyswap": return "BOO";
         case "Astroport": return "ASTRO";
         case "Orca": return "ORCA";
+        case "3Crv": return "USDT-USDC-DAI";
 
         default: return name;
     }
@@ -119,6 +120,7 @@ export const HECO = "HECO";
 export const FRAX = "FRAX";
 export const NEAR = "NEAR";
 export const MIM = "MIM";
+export const USDD = "USDD";
 
 
 export const Wormhole = "Wormhole";

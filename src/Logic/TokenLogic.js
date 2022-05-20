@@ -10,6 +10,10 @@ export const getCurveAsync = async () => {
     //console.log(data);
     return createCurve(data.data[0]);
 }
+export const getCurveFactoryAsync = async () => {
+    const data = await getServerDataAsync(["curveEthFactory"]);
+    return createCurve(data.data[0]);
+}
 
 export const getUsdAsync = async () => {
     const data = await getServerDataAsync(["etherscanUsdc", "polygonscanUsdc", "bscscanUsdc", 
@@ -19,7 +23,7 @@ export const getUsdAsync = async () => {
         "croUsdt", "croUsdc", "auroraUsdt", "auroraUsdc", "glmrUsdt", "glmrUsdc",
         "etherscanUst", "avaxUstWormhole", "avaxUstAxelar", "bscscanUst",
         "ftmUst", "hecoinfoUsdc", "hecoinfoUsdt", "arbiscanUsdc", "arbiscanUsdt"]); // "terraUst"
-    console.log(data);
+    //console.log(data);
     const dataAlgoUsdc = await getDataAsync("https://indexer.algoexplorerapi.io/v2/assets/31566704?include-all=true");
     const dataAlgoUsdt = await getDataAsync("https://indexer.algoexplorerapi.io/v2/assets/312769?include-all=true");
     const dataSolUsdt = await getDataAsync("https://public-api.solscan.io/market/token/Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB");
@@ -54,7 +58,7 @@ export const getUsdAsync = async () => {
         createTokenData(MOVR, processData(data.data[11]), USDT),
         createTokenData(GLMR, processData(data.data[16]), USDT),
 
-        //createTokenData(LUNA, processDataLuna(data.data[21]), UST),
+        //createTokenData(LUNA, processDataLuna(data.data[27]), UST),
         createTokenData(ETH, processData(data.data[18])/1000000000000, UST),
         createTokenData(AVAX, processData(data.data[19]), UST, Wormhole),
         createTokenData(AVAX, processData(data.data[20]), UST, Axelar),
@@ -65,10 +69,11 @@ export const getUsdAsync = async () => {
 }
 
 const ETH_CURVE_3POOL_ADDRESS = "0xbEbc44782C7dB0a1A60Cb6fe97d0b483032FF1C7";
+const ETH_CURVE_USDD_POOL_ADDRESS = "0xe6b5CC1B4b47305c58392CE3D359B10282FC36Ea";
 const createCurve = (data) => {
     const result = [];
     for (const item of data.data.poolData) {
-        if (item.address === ETH_CURVE_3POOL_ADDRESS) {
+        if ([ETH_CURVE_3POOL_ADDRESS, ETH_CURVE_USDD_POOL_ADDRESS].includes(item.address)) {
             let sum = 0;
             for (const coin of item.coins) {
                 result.push(curveItem(coin.symbol, coin.poolBalance, coin.decimals));

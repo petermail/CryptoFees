@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react'
 import { CoinImage, Img } from "./Tile"
-import { getCurveAsync, getUsdAsync } from '../Logic/TokenLogic';
+import { getCurveAsync, getCurveFactoryAsync, getUsdAsync } from '../Logic/TokenLogic';
 import { Table } from './Table';
 import { BUSD, DAI, FRAX, MIM, USDC, USDT, UST } from '../Logic/ConstLogic';
 
 export const TokenAmounts = () => {
     const [tokens, setTokens] = useState([]);
     const [curve, setCurve] = useState([]);
+    const [factory, setFactory] = useState([]);
 
     useEffect(() => {
         loadTokensAsync();
@@ -16,6 +17,8 @@ export const TokenAmounts = () => {
         setTokens(x => u);
         const c = await getCurveAsync();
         setCurve(x => c);
+        const f = await getCurveFactoryAsync();
+        setFactory(x => f);
     }
 
     return (
@@ -48,7 +51,8 @@ export const TokenAmounts = () => {
                     [<CoinImage coin={BUSD} />, "centralized"], [<CoinImage coin={DAI} />, "decentralized"], [<CoinImage coin={MIM} />, "decentralized"], 
                     [<CoinImage coin={FRAX} />, "decentralized"], [<CoinImage coin={UST} />, "de-pegged"]]}>
                 </Table>
-                <CurvePool data={curve} />
+                <CurvePool data={curve} superheader={"Curve stable pool on Ethereum"} />
+                <CurvePool data={factory} superheader={"Curve USDD pool on Ethereum"} />
             </div>
             </div>
             <br />
@@ -73,7 +77,7 @@ const TokenAmount = (props) => {
 }
 
 const CurvePool = (props) => {
-    const { data } = props;
+    const { data, superheader } = props;
 
     const makeRows = (items) => {
         return items.length === 0 ? [["", "loading data"]] 
@@ -83,6 +87,6 @@ const CurvePool = (props) => {
     }
 
     return (
-        <Table superheader={"Curve stable pool on Ethereum"} headers={["Coin", "Amount", "%"]} rows={makeRows(data)} />
+        <Table superheader={superheader} headers={["Coin", "Amount", "%"]} rows={makeRows(data)} />
     )
 }
