@@ -6,10 +6,10 @@ export const loadGasAsync = async (onUpdate, onFinish) => {
     const services = [["etherscanGas", "polygonscanGas", "bscscanGas", "avaxGas", "ftmGas"],
         ["empty", "empty", "empty", "empty", "empty", "moonriverGas", "xmrGas", "hecoinfoGas", "croGas", "arbGas"]];
         // "lunaGas"
-    for (let service of services) {
+    for (const service of services) {
         const data = await getServerDataAsync(service);
 
-        console.log(data);
+        //console.log(data);
         //console.log(data.data[9].data);
         res = [addData(res, 0, () => privateConvertGas(0, "ETH", "GWEI", data.data[0]?.result)),
             addData(res, 1, () =>  privateConvertGas(3, "AVAX", "nAVAX", data.data[3]?.result)),

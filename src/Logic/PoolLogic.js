@@ -1,6 +1,5 @@
 import { getServerDataAsync } from "./ServerLogic";
-import { FTM, USDC, USDT, ETH, BTC, BNB, MATIC, HT, AVAX, GLMR, AURORA, USDD } from './ConstLogic';
-import { unstable_batchedUpdates } from "react-dom";
+import { FTM, USDC, USDT, ETH, BTC, BNB, MATIC, HT, AVAX, GLMR, AURORA, USDD, MOVR } from './ConstLogic';
 
 export const getPoolsAsync = async (onFinish) => {
     let fullResult = [];
@@ -50,8 +49,9 @@ const processBeefyData = (data) => {
             results.push(createPool(key, data[key].totalApy, '', url));
         }
     }
-    const res = [{chain: AVAX, pools: []}, {chain: FTM, pools: []},
-        {chain: "Arbitrum", pools: []}, {chain: AURORA, pools: []}];
+    const res = [{chain: GLMR, pools: []}, {chain: FTM, pools: []},
+        {chain: "Arbitrum", pools: []}, {chain: AURORA, pools: []},
+        {chain: AVAX, pools: []}];
     for (const r in results) {
         const pool = results[r].pool;
         const title = processTitleBeefy(pool);
@@ -88,6 +88,8 @@ const processTitleBeefy = (name) => {
         return 'TOR-USDC-DAI';
     } else if (name === 'ellipsis-usdd') {
         return 'USDD-USDT-USDC-BUSD';
+    } else if (name === 'ellipsis-usdd2pool') {
+        return 'USDD-BUSD';
     } else if (name.indexOf('stargate') === 0) {
         return name.substring(name.lastIndexOf('-') + 1).toUpperCase();
     } else return name.substring(name.indexOf('-') + 1).toUpperCase();
@@ -108,18 +110,20 @@ const filterAutofarmData = (name) => {
 
 const getBeefyChain = (title) => {
     switch (title){
-        case 'png-ust-usdc':
+        //case 'png-ust-usdc':
+        case 'aavev3-usdt':
         case 'stargate-avax-usdc':
         case 'stargate-avax-usdt':
-        case 'curve-avax-f-3pool':
-        case 'png-ustw-usdc': return AVAX;
+        //case 'curve-avax-f-3pool':
+        //case 'png-ustw-usdc': 
+            return AVAX;
         case 'beamswap-usdc-busd':
         case 'stellaswap-usdc-usdt':
         case 'beamswap-usdc-usdt':
         case 'beamswap-dai-usdc':
         case 'sushi-mr-frax-usdc':
-        case 'solarbeam-frax-3pool':
         case 'stellaswap-dai-usdc': return GLMR;
+        case 'solarbeam-frax-3pool': return MOVR;
         //case 'scream-mim':
         //case 'scream-usdc':
         //case 'scream-usdt':
@@ -128,10 +132,11 @@ const getBeefyChain = (title) => {
         case 'stargate-fantom-usdc':
         case 'hector-tor-crv':
         case 'spirit-mim-usdc': return FTM;
-        case 'rose-ust-3pool':
+        //case 'rose-ust-3pool':
         case 'trisolaris-usdt-usdc': return AURORA;
         case 'curve-arb-2pool':
         case 'spell-mim-crv': return "Arbitrum";
+        case 'ellipsis-usdd2pool':
         case 'ellipsis-usdd': return BNB;
         default: return null;
     }
@@ -143,5 +148,5 @@ const filterBeefyData = (name) => {
         "mim-crv", "ftm-mim-crv", "mim", "usdc", "usdt", "dai", 'usdd',
         "avax-usdc", 'avax-usdt', 'fantom-usdc', 'fantom-usdt',
         'avax-f-3pool', 'mr-frax-usdc', 'ust-3pool', 'frax-3pool',
-        'arb-2pool', 'tor-crv'].includes(sub);
+        'arb-2pool', 'tor-crv', 'usdd2pool'].includes(sub);
 }

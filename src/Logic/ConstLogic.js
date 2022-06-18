@@ -27,6 +27,9 @@ export const getScansToken = (chain, token) => {
         case "Arbitrum": return "https://arbiscan.io/token/" + token + "?a=" + token;
         case AURORA: return "https://explorer.mainnet.aurora.dev/token/" + token + "/token-transfers";
         case HT: return "https://hecoinfo.com/token/" + token;
+        case TRX: return "https://tronscan.io/#/token20/" + token;
+        case "Optimism": return "https://optimistic.etherscan.io/token/" + token;
+        case NEAR: return "https://nearblocks.io/address/" + token;
         default: return null;
     }
 }
@@ -83,6 +86,8 @@ export const convCoinName = (name) => {
         case "Astroport": return "ASTRO";
         case "Orca": return "ORCA";
         case "3Crv": return "USDT-USDC-DAI";
+        case "Stargate Finance": return "STG";
+        case "Secret Finance": return "SEFI";
 
         default: return name;
     }
@@ -121,6 +126,9 @@ export const FRAX = "FRAX";
 export const NEAR = "NEAR";
 export const MIM = "MIM";
 export const USDD = "USDD";
+export const TRX = "TRX";
+export const USN = "USN";
+export const sUSD = "sUSD";
 
 
 export const Wormhole = "Wormhole";

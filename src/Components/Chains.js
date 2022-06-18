@@ -1,5 +1,5 @@
 import { getChains } from "../Logic/ChainLogic"
-import { getScansToken, USDC, USDT, UST } from "../Logic/ConstLogic";
+import { getScansToken, USDC, USDD, USDT, USN, UST } from "../Logic/ConstLogic";
 import { Table } from "./Table";
 import { CoinImage } from "./Tile";
 
@@ -12,7 +12,7 @@ export const Chains = () => {
         await navigator.clipboard.writeText(text);
     }
 
-    const coins = [USDC, USDT, UST];
+    const coins = [USDC, USDT, USDD, USN, UST];
     return (<div>
         {coins.map(coin => {
             const superheader = <div><CoinImage coin={coin} /></div>;

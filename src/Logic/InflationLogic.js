@@ -57,7 +57,7 @@ const compareData2 = (prev, curr) => {
         const prevCoin = convCoinName(itemPrev.Coin);
         for (let j = 0; j < curr.result.length; ++j) {
             const itemCurr = curr.result[j];
-            if (prevCoin === itemCurr.Coin) {
+            if (prevCoin === itemCurr.Coin && itemPrev.Supply > 0) {
                 curr.result[j].inflation2 = 100 * timeDiff * (itemCurr.Supply - itemPrev.Supply) / itemPrev.Supply;
             }
         }

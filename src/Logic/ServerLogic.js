@@ -3,6 +3,9 @@ import axios from "axios"
 export const getServerDataAsync = async (names) => {
     return await axios.post("https://fullbridge.wz.cz/CryptoFees/resend.php", { names: names });
 }
+export const getServerDataPostAsync = async (names) => {
+    return await axios.post("https://fullbridge.wz.cz/CryptoFees/resendPost.php", { names: names });
+}
 
 export const getCoinExFeesAsync = async () => {
     return await getServerDataAsync(["coinex"]);
@@ -43,6 +46,10 @@ export const getHuobiOneCoin = (coin) => {
     return "huobi" + coin[0].toUpperCase() + coin.substring(1).toLowerCase();
 }
 
-export const getDataAsync = async (url) => {
-    return await axios.get(url);
+export const getDataAsync = async (url, timeout = undefined) => {
+    if (timeout) {
+        return await axios.get(url, { timeout: timeout });
+    } else {
+        return await axios.get(url);
+    }
 }

@@ -2,7 +2,7 @@ import { Table } from './Table';
 import { CoinImage, Img } from './Tile';
 
 import ExternalLink from '../Images/external_link.png'
-import { BNB, LUNA, SCRT, FTM, CRO, SOL, AVAX, ETH, MATIC, OSMO, RUNE, AURORA, NEAR, GLMR, MOVR, HT, ALGO } from '../Logic/ConstLogic';
+import { BNB, LUNA, SCRT, FTM, CRO, SOL, AVAX, ETH, MATIC, OSMO, RUNE, AURORA, NEAR, GLMR, MOVR, HT, ALGO, TRX } from '../Logic/ConstLogic';
 
 export const Links = () => {
 
@@ -11,7 +11,6 @@ export const Links = () => {
         [<Link key={2} coin="AUTO" href="https://autofarm.network" title="Autofarm" />],
         [<Link key={3} coin="BIFI" href="https://app.beefy.com/#/" title="Beefy" />],
         [<Link key={4} href="https://app.hector.finance/#/farming" coins={[FTM]} title="Hector Finance" />],
-        [<Link key={5} href="https://soluna.money/#/stake" coins={[SOL]} title="Soluna" />],
     ];
     const rowsBridge = [[<Link key={11} href="https://bridge.terra.money/" coins={[LUNA]} title="Terra" />],
         [<Link key={12} href="https://bridge.scrt.network/" coins={[SCRT]} title="Secret Network" />],
@@ -39,6 +38,7 @@ export const Links = () => {
         [<Link key={31} coin="BSW" href="https://exchange.biswap.org" coins={[BNB]} title="Biswap" />],
         [<Link key={33} href="https://app.ref.finance" coins={[NEAR]} title="Ref.finance" />],
         [<Link key={34} href="https://app.algofi.org/swap" coins={[ALGO]} title="Algofi" />],
+        [<Link key={35} href="https://sun.io" coins={[TRX]} title="SUN" />],
         [<Link key={32} href="https://app.acryptos.com/stableswap/" coins={[BNB]} title="ACryptoS stable" />],
     ];
     const rowsLend = [[<Link key={40} coin="TULIP" href="https://tulip.garden/lend" coins={[SOL]} title="Tulip" />],
@@ -49,10 +49,19 @@ export const Links = () => {
         [<Link key={45} href="https://app.venus.io/dashboard" coins={[BNB]} title="Venus Protocol" />],
         [<Link key={46} href="https://app.tectonic.finance/markets/" coins={[CRO]} title="Tectonic" />],
         [<Link key={47} href="https://app.aurigami.finance/" coins={[AURORA]} title="Aurigami" />],
+        [<Link keh={48} href="https://app.sienna.network/lend/deposit" coins={[SCRT]} title="Sienna" />],
+        [<Link key={49} href="https://app.burrow.cash/#/deposit" coins={[NEAR]} title="Burrow" />],
+        [<Link keh={140} href="https://justlend.org/#/market" coins={[TRX]} title="JustLend" />],
     ];
     const rowsOther = [[<Link href="https://gmx.io/trade" coins={[AVAX]} title="GMX" />],
         [<Link href="https://app.friktion.fi/" coins={[SOL]} title="Friktion" />],
         [<Link href="https://francium.io/app/strategies/farming" coins={[SOL]} title="Francium" />],
+        [<Link href="https://app.lyra.finance" coins={[ETH]} title="Lyra" />],
+        [<Link href="https://app.ribbon.finance/" coins={[SOL]} title="Ribbon" />],
+        [<Link href="https://v2.compli.fi/trade" coins={[MATIC]} title="CompliFi" />],
+    ];
+    const rowsStablecoins = [[<Link href="https://www.hedge.so/borrow" coins={[SOL]} title="Hedge" />],
+        [<Link href="https://app.hubbleprotocol.io/stats" coins={[SOL]} title="Hubble" />]
     ];
     const width = 240;
     return (
@@ -63,6 +72,7 @@ export const Links = () => {
                 <Table headers={[<h3>lending</h3>]} rows={rowsLend} width={width} />
                 <Table headers={headersFarm} rows={rowsFarm} width={width} />
                 <Table headers={[<h3>other</h3>]} rows={rowsOther} width={width} />
+                <Table headers={[<h3>small stablecoins</h3>]} rows={rowsStablecoins} width={width} />
             </div>
             <br />
             <p>
@@ -86,6 +96,10 @@ export const Links = () => {
             </p>
         </div>
     )
+}
+
+export const ExtLink = (props) => {
+    return <Link {...props} />
 }
 
 const Link = ({ href, title, coins, coin }) => {

@@ -11,6 +11,7 @@ import { Links } from './Links'
 import '../Css/Main.css';
 import { Chains } from './Chains'
 import { Index } from './Index'
+import { Starter } from './Starter'
 
 export const Main = () => {
 
@@ -26,10 +27,12 @@ export const Main = () => {
                         <Route path="/gas" element={<TilesGas />} />
                         <Route path="/bridge" element={<Bridges />} />
                         <Route path="/pool" element={<Pools />} />
+                        <Route path="/yield" element={<Pools />} />
                         <Route path="/stablecoins" element={<TokenAmounts />} />
                         <Route path="/inflation" element={<Inflation />} />
                         <Route path="/chain-data" element={<Chains />} />
                         <Route path="/links" element={<Links />} />
+                        <Route path="/faucet" element={<Starter />} />
                     </Route>
 
 
@@ -52,16 +55,16 @@ export const MainMenu = () => {
                     <NavLink to="/gas">Blockchain fees</NavLink>
                 </li>
                 <li>
-                    <NavLink to="/bridge">Bridges</NavLink>
-                </li>
-                <li>
-                    <NavLink to="/pool">Pools</NavLink>
+                    <NavLink to="/yield">Yield</NavLink>
                 </li>
                 <li>
                     <NavLink to="/stablecoins">Stablecoins</NavLink>
                 </li>
                 <li>
                     <NavLink to="/inflation">Inflation</NavLink>
+                </li>
+                <li>
+                    <NavLink to="/bridge">Bridges</NavLink>
                 </li>
                 <li>
                     <NavLink to="/chain-data">Chain</NavLink>
