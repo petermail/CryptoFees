@@ -136,6 +136,8 @@ const fixHuobiName = (name) => {
         return "BEP20";
     } else if (name === "ERC20") {
         return "ETH";
+    } else if (name === "OPT") {
+        return "OP";
     }
     return name;
 }
