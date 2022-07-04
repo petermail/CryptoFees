@@ -1,4 +1,4 @@
-import { getCoinExFeesAsync, getCryptoComFeesAsync, getHuobiFeesAsync, getPricesAsync } from "./ServerLogic";
+import { getCoinExFeesAsync, getCryptoComFeesAsync, getHuobiFeesAsync, getNominexFeesAsync, getPricesAsync } from "./ServerLogic";
 import { BNB, ETH, LUNA } from './ConstLogic'
 
 var activeId = 0;
@@ -25,6 +25,12 @@ export const loadFeesAsync = async (onUpdate) => {
         const result = mergeCoinExFeeList(res, resCoinEx);
         //console.log(result);
         onUpdate([ ...result ]);
+
+        const resNominex = await loadNominexDataAsync();
+        //console.log(resNominex);
+        const result2 = mergeNominexFeeList(result, resNominex);
+        //console.log(result2);
+        onUpdate([ ...result2 ]);
     }
     //const result = mergeCoinExFeeList(res, resCoinEx);
     //return result;
@@ -69,6 +75,20 @@ const mergeCoinExFeeList = (list, listCo) => {
     }
     return list;
 }
+const mergeNominexFeeList = (list, listNo) => {
+    for (let i = 0; i < list.length; ++i) {
+        const found = listNo.filter(x => x.coin === list[i].coin);
+        if (found && found[0] && found[0].data) {
+            for (let j = 0; j < list[i].data.length; ++j) {
+                const found2 = found[0].data.filter(x => x.chain === list[i].data[j].chain);
+                if (found2 && found2[0]) {
+                    list[i].data[j].feeNominex = found2[0].feeNominex;
+                }
+            }
+        }
+    }
+    return list;
+}
 
 export const loadPricesAsync = async () => {
     const data = await getPricesAsync();
@@ -90,6 +110,11 @@ export const loadCryptoComDataAsync = async () => {
 export const loadCoinExDataAsync = async () => {
     const res = await getCoinExFeesAsync();
     return convertServerCoinEx(res.data[0].data.config);
+}
+
+export const loadNominexDataAsync = async () => {
+    const res = await getNominexFeesAsync();
+    return convertServerNominex(res.data[0]);
 }
 
 export const loadHuobiDataAsync = async (coins) => {
@@ -136,6 +161,8 @@ const fixHuobiName = (name) => {
         return "BEP20";
     } else if (name === "ERC20") {
         return "ETH";
+    } else if (name === "OPT") {
+        return "OP";
     }
     return name;
 }
@@ -163,6 +190,18 @@ const fixCoinExName = (name) => {
     }
     return name;
 }
+const fixNominexName = (name) => {
+    if (name === "BSC") {
+        return "BEP20";
+    } else if (name === "MATIC") {
+        return "Polygon";
+    } else if (name === "ARBITRUM") {
+        return "Arbitrum";
+    } else if (name === "OPTIMISM") {
+        return "OP";
+    }
+    return name;
+}
 const convertServerCoinEx = (data) => {
     const result = [];
     let res = null;
@@ -183,6 +222,21 @@ const convertServerCoinEx = (data) => {
         activeCoin = firstPart;
     }
     if (res) { result.push(res); }
+    return result;
+}
+const convertServerNominex = (data) => {
+    const result = [];
+    for (let i = 0; i < data.length; ++i) {
+        const code = data[i].code;
+        if (COINS.includes(code)) {
+            const res = { id: ++activeId, coin: code, data: [] };
+            for (let j = 0; j < data[i].networkList.length; ++j) {
+                const chain = fixNominexName(data[i].networkList[j].code);
+                res.data.push({ id: j, chain: chain, feeNominex: data[i].networkList[j].withdrawalFee });
+            }
+            result.push(res);
+        }
+    }
     return result;
 }
 const convertServerCryptoCom = (symbols) => {

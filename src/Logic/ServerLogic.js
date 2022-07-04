@@ -10,6 +10,9 @@ export const getServerDataPostAsync = async (names) => {
 export const getCoinExFeesAsync = async () => {
     return await getServerDataAsync(["coinex"]);
 }
+export const getNominexFeesAsync = async () => {
+    return await getServerDataAsync(["nominex"]);
+}
 export const getCryptoComFeesAsync = async () => {
     return await getServerDataAsync(["cryptoCom"]);
 }
