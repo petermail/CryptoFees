@@ -32,8 +32,9 @@ export const Tiles = () => {
                 <td>Fee in USD<br />on Crypto.com <Img coin="CRO" /></td>
                 <td>Fee in USD<br />on Huobi <Img coin="HT" /></td>
                 <td>Fee in USD<br />on CoinEx <Img coin="CET" /></td>
+                <td>Fee in USD<br />on Nominex</td>
             </tr>
-            <tr><td colSpan={5}><hr /></td></tr>
+            <tr><td colSpan={6}><hr /></td></tr>
         </thead>
         <tbody>
             { (coins && prices && coins.length > 0) &&

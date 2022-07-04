@@ -12,14 +12,14 @@ export const Tile = (props) => {
                 </td>
             </tr>
             {data.map(x => <Chain key={x.id} coin={coin} prices={prices} {...x} />)}
-            <tr><td colSpan={5}><hr /></td>
+            <tr><td colSpan={6}><hr /></td>
             </tr>
         </>
     )
 }
 
 export const Chain = (props) => {
-    const { coin, prices, chain, feeCrypto, feeHuobi, feeCoinEx } = props;
+    const { coin, prices, chain, feeCrypto, feeHuobi, feeCoinEx, feeNominex } = props;
     const price = prices.filter(x => x.coin === coin)[0]?.price;
     //console.log("price: " + price);
 
@@ -32,6 +32,7 @@ export const Chain = (props) => {
             <td>{ price && feeCrypto !== undefined ? "$" + Math.round(feeCrypto * price * 100) / 100 : ""}</td>
             <td>{ price && feeHuobi !== undefined ? "$" + Math.round(feeHuobi * price * 100) / 100 : ""}</td>
             <td>{ price && feeCoinEx !== undefined ? "$" + Math.round(feeCoinEx * price * 100) / 100 : ""}</td>
+            <td>{ price && feeNominex !== undefined ? "$" + Math.round(feeNominex * price * 100) / 100 : ""}</td>
         </tr>
     )
 }
