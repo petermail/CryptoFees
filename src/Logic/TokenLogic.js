@@ -27,7 +27,8 @@ export const getAlgoFiAsync = async () => {
 export const getUsdAsync = async (onUpdate) => {
     let res = [];
     const serverDataFull = [
-        ["etherscanUsdc", "polygonscanUsdc", "bscscanUsdc", 
+        ["etherscanUsdc"], 
+        ["empty", "polygonscanUsdc", "bscscanUsdc", 
         "avaxUsdc", "ftmUsdc"], 
         ["empty", "empty", "empty", "empty", "empty", 
         "movrUsdc", "etherscanUsdt", "polygonscanUsdt", "bscscanUsdt", "avaxUsdt"], 
@@ -59,7 +60,6 @@ export const getUsdAsync = async (onUpdate) => {
     let dataAlgoUsdt = null; 
     let dataSolUsdt = null;
     let dataSolUsdc = null;
-    let dataSolUst = null;
     try {
         dataAlgoUsdc = await getDataAsync("https://indexer.algoexplorerapi.io/v2/assets/31566704?include-all=true", 2000);
         dataAlgoUsdt = await getDataAsync("https://indexer.algoexplorerapi.io/v2/assets/312769?include-all=true", 2000);
@@ -73,6 +73,7 @@ export const getUsdAsync = async (onUpdate) => {
     const ustIndex = usnIndex + 1;
     for (const serverData of serverDataFull) {
         const data = await getServerDataAsync(serverData);
+        //console.log(data);
         res = [
             addData(res, 0, () => createTokenData(ETH, processData(data.data[0]), USDC)),
             addData(res, 1, () => createTokenData(SOL, processDataSol(dataSolUsdc?.data), USDC)),

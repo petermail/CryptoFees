@@ -10,7 +10,7 @@ export const Links = () => {
     const rowsFarm = [[<Link key={1} coin="ANC" href="https://app.anchorprotocol.com/" coins={[LUNA, AVAX]} title="Anchor protocol" />],
         [<Link key={2} coin="AUTO" href="https://autofarm.network" title="Autofarm" />],
         [<Link key={3} coin="BIFI" href="https://app.beefy.com/#/" title="Beefy" />],
-        [<Link key={4} href="https://app.hector.finance/#/farming" coins={[FTM]} title="Hector Finance" />],
+        [<Link key={4} href="https://app.hector.finance/farm" coins={[FTM]} title="Hector Finance" />],
     ];
     const rowsBridge = [[<Link key={11} href="https://bridge.terra.money/" coins={[LUNA]} title="Terra" />],
         [<Link key={12} href="https://bridge.scrt.network/" coins={[SCRT]} title="Secret Network" />],
@@ -51,6 +51,7 @@ export const Links = () => {
         [<Link key={47} href="https://app.aurigami.finance/" coins={[AURORA]} title="Aurigami" />],
         [<Link keh={48} href="https://app.sienna.network/lend/deposit" coins={[SCRT]} title="Sienna" />],
         [<Link key={49} href="https://app.burrow.cash/#/deposit" coins={[NEAR]} title="Burrow" />],
+        [<Link key={141} href="https://app.folks.finance/markets" coins={[ALGO]} title="Folks" />],
         [<Link keh={140} href="https://justlend.org/#/market" coins={[TRX]} title="JustLend" />],
     ];
     const rowsOther = [[<Link href="https://gmx.io/trade" coins={[AVAX]} title="GMX" />],
