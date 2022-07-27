@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react'
 import Web3 from "web3";
 //import WalletConnect from '@walletconnect/client';
 
+import '../Css/Starter.css';
+
 const getWeb3 = () => {
     const web3 = new Web3(Web3.givenProvider);
     return web3;
@@ -11,7 +13,6 @@ const getWeb3 = () => {
 
 const connect = (onConnected, onNetworkUpdate, onAccountUpdate) => {
     var ethereum;
-    console.log("connecting");
     if (typeof window.ethereum !== 'undefined'){
         ethereum = window.ethereum;
 
@@ -137,6 +138,8 @@ export const Starter = () => {
     const [eth, setEth] = useState(null);
     const [wallet, setWallet] = useState("");
     const [chain, setChain] = useState("");
+    const [destChain, setDestChain] = useState("");
+    const chains = ["Binance", "Polygon", "Avax", "Fantom", "Moonriver", "Moonbeam", "Aurora", "Cronos"];
 
     const connectHandler = () => {
         setWeb3(x => getWeb3());
@@ -170,9 +173,12 @@ export const Starter = () => {
     }, [web3]);
 
     return (<div>
-        wallet: {wallet}<br />
+        wallet: {wallet}<Disconnect eth={eth} /><br />
         chain: {chain}<br />
-        <Disconnect eth={eth} /><br />
+        <div>
+          Send 1 USDC or USDT and receive small amount of coins for gas at specific blockchain.
+        </div>
+        <StarterChains chains={chains} setDestChain={setDestChain} />
         <Signing web3={web3} wallet={wallet} destinationAddress={wallet} chain={"Binance"} amountSend={1} delayTill={"17.10.2010"} /><br />
     </div>);
 }
@@ -191,4 +197,24 @@ const Signing = (props) => {
 
 const Disconnect = (eth) => {
     return (<div onClick={() => disconnect(eth)}>disconnect</div>)
+}
+
+const StarterChains = (props) => {
+  const { chains, setDestChain } = props;
+
+  <div className="wrap">
+    {chains.map(x => <StarterChain chain={x} select={() => setDestChain(x => x)} />)}
+  </div>
+}
+
+const StarterChain = (props) => {
+  const { chain, select } = props;
+  const [isActive, setIsActive] = useState(false);
+
+  return (<div className={`${isActive ? "active" : ""}`}>
+  <div className={`${chain} starterChain`} onClick={() => { select(); setIsActive(x => !x); }}>
+    <div className="inside">
+      <div className="insideText"><div className="big">$1</div>{chain}</div>
+    </div>
+  </div></div>)
 }

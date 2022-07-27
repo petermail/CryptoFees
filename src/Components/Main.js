@@ -11,7 +11,7 @@ import { Links } from './Links'
 import '../Css/Main.css';
 import { Chains } from './Chains'
 import { Index } from './Index'
-//import { Starter } from './Starter'
+import { Starter } from './Starter'
 
 export const Main = () => {
 
@@ -32,7 +32,7 @@ export const Main = () => {
                         <Route path="/inflation" element={<Inflation />} />
                         <Route path="/chain-data" element={<Chains />} />
                         <Route path="/links" element={<Links />} />
-                        {/*<Route path="/faucet" element={<Starter />} />*/}
+                        <Route path="/faucet" element={<Starter />} />
                     </Route>
 
 

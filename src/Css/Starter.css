@@ -1,0 +1,57 @@
+.starterChain {
+    width: 160px;
+    height: 160px;
+    background-color: #444;
+    text-align: center;
+    margin: 10px;
+    padding: auto;
+    display: flex;
+}
+.active {
+    background-color: transparent;
+    padding: 0px;
+}
+.starterChain:hover, .active {
+    color: black;
+}
+.Binance:hover .inside, .active .Binance .inside {
+    background-color: rgb(253, 255, 148);
+}
+.Avax:hover .inside, .active .Avax .inside {
+    background-color: rgb(255, 148, 148);
+}
+.Fantom:hover .inside, .active .Fantom .inside {
+    background-color: rgb(148, 150, 255);
+}
+.Polygon:hover .inside, .active .Polygon .inside {
+    background-color: rgb(234, 148, 255);
+}
+.Moonbeam:hover .inside, .active .Moonbeam .inside {
+    background-color: rgb(148, 255, 246);
+}
+.Moonriver:hover .inside, .active .Moonriver .inside {
+    background-color: rgb(157, 255, 148);
+}
+.Aurora:hover .inside, .active .Aurora .inside {
+    background-color: rgb(86, 146, 86);
+    color: white;
+}
+.Cronos:hover .inside, .active .Cronos .inside {
+    background-color: rgb(115, 100, 172);
+    color: white;
+}
+.big {
+    font-size: 32px;
+}
+.inside {
+    background: #666;
+    margin: auto;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    font-size: 20px;
+}
+.insideText {
+    font-weight: bold;
+    margin: auto;
+}
