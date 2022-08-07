@@ -12,13 +12,13 @@ export const loadGasAsync = async (onUpdate, onFinish) => {
         //console.log(data);
         //console.log(data.data[9].data);
         res = [addData(res, 0, () => privateConvertGas(0, "ETH", "GWEI", data.data[0]?.result)),
-            addData(res, 1, () =>  privateConvertGas(3, "AVAX", "nAVAX", data.data[3]?.result)),
-            addData(res, 2, () =>  privateConvertGas(2, "BNB", "GWEI", data.data[2]?.result)),
-            addData(res, 3, () =>  privateConvertGas(1, "MATIC", "GWEI", data.data[1]?.result)),
-            addData(res, 4, () =>  privateConvertGas(4, "FTM", "GWEI", data.data[4]?.result)),
-            addData(res, 5, () =>  privateConvertCoinToolGas(8, "CRO", "GWEI", data.data[8]?.data)),
-            addData(res, 6, () =>  privateConvertGas(7, "HT", "GWEI", data.data[7]?.result)),
-            addData(res, 7, () =>  privateConvertGas(5, "MOVR", "GWEI", data.data[5]?.result)),
+            addData(res, 1, () =>  privateConvertGas(3, "AVAX", "nAVAX", data.data[3]?.result, "Avax")),
+            addData(res, 2, () =>  privateConvertGas(2, "BNB", "GWEI", data.data[2]?.result, "Binance")),
+            addData(res, 3, () =>  privateConvertGas(1, "MATIC", "GWEI", data.data[1]?.result, "Polygon")),
+            addData(res, 4, () =>  privateConvertGas(4, "FTM", "GWEI", data.data[4]?.result, "Fantom")),
+            addData(res, 5, () =>  privateConvertCoinToolGas(8, "CRO", "GWEI", data.data[8]?.data, "Cronos")),
+            addData(res, 6, () =>  privateConvertGas(7, "HT", "GWEI", data.data[7]?.result, "Heco")),
+            addData(res, 7, () =>  privateConvertGas(5, "MOVR", "GWEI", data.data[5]?.result, "Moonriver")),
             addData(res, 8, () =>  privateConvertCoinToolGas(9, "Arbitrum", "GWEI", data.data[9]?.data)),
             addData(res, 9, () =>  privateXmrGas(6, "XMR", "mXMR", data.data[6]?.data)),
             //addData(res, 10, () =>  privateLunaGas(7, "LUNA", "mUST", data.data[3])),
@@ -59,7 +59,7 @@ const privateLunaGas = (id, chain, gasUnit, data) => {
         price: 1,
      };
 }
-const privateConvertGas = (id, chain, gasUnit, data) => {
+const privateConvertGas = (id, chain, gasUnit, data, chainName) => {
     if (!data) { return getEmpty(id, chain, gasUnit); }
     return { 
         id: id,
@@ -69,10 +69,11 @@ const privateConvertGas = (id, chain, gasUnit, data) => {
         gasSafe: Math.round(data.SafeGasPrice), 
         gasFast: Math.round(data.FastGasPrice),
         baseFee: data.suggestBaseFee,
-        price: data.UsdPrice
+        price: data.UsdPrice,
+        chainName: chainName
     };
 }
-const privateConvertCoinToolGas = (id, chain, gasUnit, data) => {
+const privateConvertCoinToolGas = (id, chain, gasUnit, data, chainName) => {
     if (!data) { return getEmpty(id, chain, gasUnit); }
     return {
         id: id,
@@ -81,6 +82,7 @@ const privateConvertCoinToolGas = (id, chain, gasUnit, data) => {
         gas: data.normal.price/1000000000,
         gasSafe: data.slow.price/1000000000,
         gasFast: data.fast.price/1000000000,
+        chainName: chainName
     };
 }
 const getEmpty = (id, chain, gasUnit) => {

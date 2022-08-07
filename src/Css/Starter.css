@@ -11,47 +11,122 @@
     background-color: transparent;
     padding: 0px;
 }
-.starterChain:hover, .active {
+.starterChain:hover, .active, .spec {
     color: black;
 }
-.Binance:hover .inside, .active .Binance .inside {
+.spec span {
+    padding: 4px;
+}
+.active .starterChain {
+    border: 2px black solid;
+}
+.Binance:hover .inside, .active .Binance .inside, .spec .Binance {
     background-color: rgb(253, 255, 148);
 }
-.Avax:hover .inside, .active .Avax .inside {
+.Avax:hover .inside, .active .Avax .inside, .spec .Avax {
     background-color: rgb(255, 148, 148);
 }
-.Fantom:hover .inside, .active .Fantom .inside {
+.Fantom:hover .inside, .active .Fantom .inside, .spec .Fantom {
     background-color: rgb(148, 150, 255);
 }
-.Polygon:hover .inside, .active .Polygon .inside {
+.Polygon:hover .inside, .active .Polygon .inside, .spec .Polygon {
     background-color: rgb(234, 148, 255);
 }
-.Moonbeam:hover .inside, .active .Moonbeam .inside {
+.Moonbeam:hover .inside, .active .Moonbeam .inside, .spec .Moonbeam {
     background-color: rgb(148, 255, 246);
 }
-.Moonriver:hover .inside, .active .Moonriver .inside {
+.Moonriver:hover .inside, .active .Moonriver .inside, .spec .Moonriver {
     background-color: rgb(157, 255, 148);
 }
-.Aurora:hover .inside, .active .Aurora .inside {
+.Aurora:hover .inside, .active .Aurora .inside, .spec .Aurora {
     background-color: rgb(86, 146, 86);
     color: white;
 }
-.Cronos:hover .inside, .active .Cronos .inside {
+.Cronos:hover .inside, .active .Cronos .inside, .spec .Cronos {
     background-color: rgb(115, 100, 172);
+    color: white;
+}
+.USDC:hover .inside, .active .USDC .inside, .spec .USDC {
+    background-color: rgb(116, 181, 193);
+    color: white;
+}
+.USDT:hover .inside, .active .USDT .inside, .spec .USDT {
+    background-color: rgb(116, 193, 116);
+    color: white;
+}
+.usd {
     color: white;
 }
 .big {
     font-size: 32px;
 }
+.bigSize {
+    width: 120px;
+    height: 120px;
+}
 .inside {
     background: #666;
     margin: auto;
-    width: 120px;
-    height: 120px;
     display: flex;
     font-size: 20px;
 }
 .insideText {
     font-weight: bold;
     margin: auto;
+}
+.marg10 {
+    margin: 10px;
+}
+.pad10 {
+    padding: 10px;
+}
+
+.inputBig {
+    height: 30px;
+    width: 420px;
+    font-size: 16px;
+}
+.inputBoxBig {
+    width: 20px;
+    height: 20px;
+    margin: 8px;
+}
+.valid {
+    background:rgb(115, 183, 115)
+}
+.invalid {
+    background:rgb(183, 122, 115)
+}
+.warning {
+    background:rgb(132, 25, 13);
+}
+
+.buttonNice {
+	display: inline-block;
+	padding: .75rem 1.25rem;
+	/*border-radius: 10rem;*/
+	color: #fff;
+	text-transform: uppercase;
+	font-size: 1rem;
+	letter-spacing: .10rem;
+	transition: all .3s;
+	position: relative;
+	overflow: hidden;
+	z-index: 1;
+    background-color: #666;
+    border: 2px transparent solid;
+    cursor: pointer;
+}
+.buttonNice:hover {
+    background-color: #888;
+    border: 2px black solid;
+}
+.buttonMin {
+	transition: all .3s;
+    border: 2px transparent solid;
+    cursor: pointer;
+}
+.buttonMin:hover {
+    background-color: #888;
+    border: 2px black solid;
 }

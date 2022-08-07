@@ -23,6 +23,7 @@ export const Links = () => {
         [<Link key={19} href="https://synapseprotocol.com/" title="Synapse Bridge" />],
         [<Link key={111} href="https://app.rubic.exchange/" title="Rubic" />],
         [<Link key={112} href="https://rainbowbridge.app/transfer" coins={[NEAR, AURORA, ETH]} title="Rainbow Bridge" />],
+        [<Link key={113} href="https://app.hop.exchange/#/send" title="Hop" />],
     ];
     const rowsSwap = [[<Link key={20} coin="CAKE" href="https://pancakeswap.finance/swap" coins={[BNB]} title="PancakeSwap" />],
         [<Link key={21} coin={OSMO} href="https://app.osmosis.zone/" coins={[OSMO]} title="Osmosis" />],

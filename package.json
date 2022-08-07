@@ -6,7 +6,11 @@
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
+    "@walletconnect/client": "^1.7.8",
+    "@walletconnect/qrcode-modal": "^1.7.8",
+    "@walletconnect/web3-provider": "^1.7.8",
     "axios": "^0.24.0",
+    "bignumber.js": "^9.0.2",
     "buffer": "^6.0.3",
     "gh-pages": "^3.2.3",
     "process": "^0.11.10",
