@@ -2,7 +2,7 @@ import { Table } from './Table';
 import { CoinImage, Img } from './Tile';
 
 import ExternalLink from '../Images/external_link.png'
-import { BNB, LUNA, SCRT, FTM, CRO, SOL, AVAX, ETH, MATIC, OSMO, RUNE, AURORA, NEAR, GLMR, MOVR, HT, ALGO, TRX } from '../Logic/ConstLogic';
+import { BNB, LUNA, SCRT, FTM, CRO, SOL, AVAX, ETH, MATIC, OSMO, RUNE, AURORA, NEAR, GLMR, MOVR, HT, ALGO, TRX, ATOM, DOT } from '../Logic/ConstLogic';
 
 export const Links = () => {
 
@@ -50,20 +50,28 @@ export const Links = () => {
         [<Link key={45} href="https://app.venus.io/dashboard" coins={[BNB]} title="Venus Protocol" />],
         [<Link key={46} href="https://app.tectonic.finance/markets/" coins={[CRO]} title="Tectonic" />],
         [<Link key={47} href="https://app.aurigami.finance/" coins={[AURORA]} title="Aurigami" />],
-        [<Link keh={48} href="https://app.sienna.network/lend/deposit" coins={[SCRT]} title="Sienna" />],
+        [<Link key={48} href="https://app.sienna.network/lend/deposit" coins={[SCRT]} title="Sienna" />],
         [<Link key={49} href="https://app.burrow.cash/#/deposit" coins={[NEAR]} title="Burrow" />],
         [<Link key={141} href="https://app.folks.finance/markets" coins={[ALGO]} title="Folks" />],
         [<Link keh={140} href="https://justlend.org/#/market" coins={[TRX]} title="JustLend" />],
     ];
-    const rowsOther = [[<Link href="https://gmx.io/trade" coins={[AVAX]} title="GMX" />],
-        [<Link href="https://app.friktion.fi/" coins={[SOL]} title="Friktion" />],
-        [<Link href="https://francium.io/app/strategies/farming" coins={[SOL]} title="Francium" />],
-        [<Link href="https://app.lyra.finance" coins={[ETH]} title="Lyra" />],
-        [<Link href="https://app.ribbon.finance/" coins={[SOL]} title="Ribbon" />],
-        [<Link href="https://v2.compli.fi/trade" coins={[MATIC]} title="CompliFi" />],
+    const rowsOther = [[<Link key={50} href="https://gmx.io/trade" coins={[AVAX]} title="GMX" />],
+        [<Link key={51} href="https://app.friktion.fi/" coins={[SOL]} title="Friktion" />],
+        [<Link key={52} href="https://francium.io/app/strategies/farming" coins={[SOL]} title="Francium" />],
+        [<Link key={53} href="https://app.lyra.finance" coins={[ETH]} title="Lyra" />],
+        [<Link key={54} href="https://app.ribbon.finance/" coins={[SOL]} title="Ribbon" />],
+        [<Link key={55} href="https://v2.compli.fi/trade" coins={[MATIC]} title="CompliFi" />],
     ];
-    const rowsStablecoins = [[<Link href="https://www.hedge.so/borrow" coins={[SOL]} title="Hedge" />],
-        [<Link href="https://app.hubbleprotocol.io/stats" coins={[SOL]} title="Hubble" />]
+    const rowsStablecoins = [[<Link key={60} href="https://www.hedge.so/borrow" coins={[SOL]} title="Hedge" />],
+        [<Link key={61} href="https://app.hubbleprotocol.io/stats" coins={[SOL]} title="Hubble" />]
+    ];
+    const rowsStaking = [
+        [<Link key={70} href="https://wallet.keplr.app/chains/cosmos-hub" coins={[ATOM, OSMO]} title="Keplr" />],
+        [<Link key={75} href="https://app.shadeprotocol.io/staking-derivatives" coins={[SCRT]} title="Shadow Protocol" />],
+        [<Link key={71} href="https://www.argofinance.money/stake" coins={[CRO]} title="Argo" />],
+        [<Link key={72} href="https://bnbchain.staderlabs.com/liquid-staking/bnbx" coins={[BNB]} title="Stader" />],
+        [<Link key={73} href="https://polkadot.lido.fi/" coins={[DOT]} title="Lido Polkadot" />],
+        [<Link key={74} href="https://solana.lido.fi/"  coins={[SOL]}  title="Lido Solana" />],
     ];
     const width = 240;
     return (
@@ -75,6 +83,7 @@ export const Links = () => {
                 <Table headers={headersFarm} rows={rowsFarm} width={width} />
                 <Table headers={[<h3>other</h3>]} rows={rowsOther} width={width} />
                 <Table headers={[<h3>small stablecoins</h3>]} rows={rowsStablecoins} width={width} />
+                <Table headers={[<h3>staking</h3>]} rows={rowsStaking} width={width} />
             </div>
             <br />
             <p>

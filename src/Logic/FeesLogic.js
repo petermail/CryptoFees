@@ -3,7 +3,7 @@ import { BNB, ETH, LUNA } from './ConstLogic'
 
 var activeId = 0;
 const COINS = ["USDT", "USDC", "DAI", "BTC", ETH, "SOL", "FTM", "AVAX", "MATIC", "DOT", BNB, LUNA, 
-    "XLM", "XMR", "CRO", "HT", "SHIB", "DOGE", "SCRT", "MOVR", "GLMR", "NEAR", "AURORA"]; // "RUNE" add it when it is used on Huobi exchange
+    "XLM", "XMR", "CRO", "HT", "SHIB", "DOGE", "SCRT", "MOVR", "GLMR", "NEAR", "AURORA", "EVMOS", "ALGO"]; // "RUNE" add it when it is used on Huobi exchange
     //"UST" removed because unknown value
 
 
@@ -153,16 +153,18 @@ const fixHuobiName = (name) => {
         return "LUNA";
     } else if (name === "CCHAIN" || name === "AVAXCCHAIN") {
         return "AVAXC";
-    } else if (name === "BEP20BTCB") {
+    } else if (name === "BEP20BTCB" || name === "BEP20BNB") {
         return "BEP20";
     } else if (name === "BSC") {
         return "BEP20";
     } else if (name === "BEP20DOT") {
         return "BEP20";
-    } else if (name === "ERC20") {
+    } else if (name === "ERC20" || name === "ERC20ETH") {
         return "ETH";
     } else if (name === "OPT") {
         return "OP";
+    } else if (name === "HECOHT") {
+        return "HT";
     }
     return name;
 }
@@ -262,7 +264,8 @@ const convertServerPrices = (prices) => {
         ["fantom", "FTM"], ["crypto-com-chain", "CRO"], ["monero", "XMR"], 
         ["huobi-token", "HT"], ["shiba-inu", "SHIB"], ["dogecoin", "DOGE"],
         ["secret", "SCRT"], ["moonriver", "MOVR"], ["moonbeam", "GLMR"], 
-        ["thorchain", "RUNE"], ["near", "NEAR"], ["aurora-near", "AURORA"]];
+        ["thorchain", "RUNE"], ["near", "NEAR"], ["aurora-near", "AURORA"],
+        ["evmos", "EVMOS"], ["algorand", "ALGO"]];
     for (let i = 0; i < pairs.length; ++i) {
         convertCoinPrivate(prices[pairs[i][0]], pairs[i][1], result);
     }

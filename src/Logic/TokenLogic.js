@@ -72,59 +72,60 @@ export const getUsdAsync = async (onUpdate) => {
     const usnIndex = usddIndex + 1;
     const ustIndex = usnIndex + 1;
     for (const serverData of serverDataFull) {
-        const data = await getServerDataAsync(serverData);
-        //console.log(data);
-        res = [
-            addData(res, 0, () => createTokenData(ETH, processData(data.data[0]), USDC)),
-            addData(res, 1, () => createTokenData(SOL, processDataSol(dataSolUsdc?.data), USDC)),
-            addData(res, 2, () => createTokenData(TRX, processDataTron(tronDataFix(data2.data)[0])/1000000, USDC)),
-            addData(res, 3, () => createTokenData(BNB, processData(data.data[2])/1000000000000, USDC)),
-            addData(res, 4, () => createTokenData(MATIC, processData(data.data[1]), USDC)),
-            addData(res, 5, () => createTokenData(CRO, processData(data.data[13]), USDC)),
-            addData(res, 6, () => createTokenData("Arbitrum", processData(data.data[25]), USDC)),
-            addData(res, 7, () => createTokenData(AVAX, processData(data.data[3]), USDC)),
-            addData(res, 8, () => createTokenData(FTM, processData(data.data[4]), USDC)),
-            addData(res, 9, () => createTokenData(ALGO, processDataAlgo(dataAlgoUsdc?.data), USDC)),
-            addData(res, 10, () => createTokenData("Optimism", processData(data.data[27]), USDC)),
-            addData(res, 11, () => createTokenData(NEAR, processDataNear(dataPost.data[0], 6), USDC)),
-            addData(res, 12, () => createTokenData(AURORA, processDataAurora(data.data[15]), USDC)),
-            addData(res, 13, () => createTokenData(MOVR, processData(data.data[5]), USDC)),
-            addData(res, 14, () => createTokenData(GLMR, processData(data.data[17]), USDC)),
-            addData(res, 15, () => createTokenData(HT, processData(data.data[23]), USDC)),
-            
-            addData(res, usdtIndex, () => createTokenData(TRX, processDataTron(tronDataFix(data2.data)[1])/1000000, USDT)),
-            addData(res, usdtIndex + 1, () => createTokenData(ETH, processData(data.data[6]), USDT)),
-            addData(res, usdtIndex + 2, () => createTokenData(BNB, processData(data.data[8])/1000000000000, USDT)),
-            addData(res, usdtIndex + 3, () => createTokenData(SOL, processDataSol(dataSolUsdt?.data), USDT)),
-            addData(res, usdtIndex + 4, () => createTokenData(MATIC, processData(data.data[7]), USDT)),
-            addData(res, usdtIndex + 5, () => createTokenData(CRO, processData(data.data[12]), USDT)),
-            addData(res, usdtIndex + 6, () => createTokenData(HT, processData(data.data[24])/1000000000000, USDT)), // 2 DOWN
-            addData(res, usdtIndex + 7, () => createTokenData("Arbitrum", processData(data.data[26]), USDT)),
-            addData(res, usdtIndex + 8, () => createTokenData(ALGO, processDataAlgo(dataAlgoUsdt?.data), USDT)), // 2 UP
-            addData(res, usdtIndex + 9, () => createTokenData(NEAR, processDataNear(dataPost.data[1], 6), USDT)),
-            addData(res, usdtIndex + 10, () => createTokenData(AVAX, processData(data.data[9]), USDT)), // 1 DOWN, 
-            addData(res, usdtIndex + 11, () => createTokenData(FTM, processData(data.data[10]), USDT)),
-            addData(res, usdtIndex + 12, () => createTokenData(AURORA, processDataAurora(data.data[14]), USDT)),
-            addData(res, usdtIndex + 13, () => createTokenData("Optimism", processData(data.data[28]), USDT)),
-            addData(res, usdtIndex + 14, () => createTokenData(MOVR, processData(data.data[11]), USDT)),
-            addData(res, usdtIndex + 15, () => createTokenData(GLMR, processData(data.data[16]), USDT)),
+        try {
+            const data = await getServerDataAsync(serverData);
+            //console.log(data);
+            res = [
+                addData(res, 0, () => createTokenData(ETH, processData(data.data[0]), USDC)),
+                addData(res, 1, () => createTokenData(SOL, processDataSol(dataSolUsdc?.data), USDC)),
+                addData(res, 2, () => createTokenData(TRX, processDataTron(tronDataFix(data2.data)[0])/1000000, USDC)),
+                addData(res, 3, () => createTokenData(MATIC, processData(data.data[1]), USDC)),
+                addData(res, 4, () => createTokenData(BNB, processData(data.data[2])/1000000000000, USDC)),
+                addData(res, 5, () => createTokenData(AVAX, processData(data.data[3]), USDC)),
+                addData(res, 6, () => createTokenData(CRO, processData(data.data[13]), USDC)),
+                addData(res, 7, () => createTokenData("Arbitrum", processData(data.data[25]), USDC)),
+                addData(res, 8, () => createTokenData("Optimism", processData(data.data[27]), USDC)),
+                addData(res, 9, () => createTokenData(FTM, processData(data.data[4]), USDC)),
+                addData(res, 10, () => createTokenData(ALGO, processDataAlgo(dataAlgoUsdc?.data), USDC)),
+                addData(res, 11, () => createTokenData(NEAR, processDataNear(dataPost.data[0], 6), USDC)),
+                addData(res, 12, () => createTokenData(AURORA, processDataAurora(data.data[15]), USDC)),
+                addData(res, 13, () => createTokenData(MOVR, processData(data.data[5]), USDC)),
+                addData(res, 14, () => createTokenData(GLMR, processData(data.data[17]), USDC)),
+                addData(res, 15, () => createTokenData(HT, processData(data.data[23]), USDC)),
+                
+                addData(res, usdtIndex, () => createTokenData(TRX, processDataTron(tronDataFix(data2.data)[1])/1000000, USDT)),
+                addData(res, usdtIndex + 1, () => createTokenData(ETH, processData(data.data[6]), USDT)),
+                addData(res, usdtIndex + 2, () => createTokenData(BNB, processData(data.data[8])/1000000000000, USDT)),
+                addData(res, usdtIndex + 3, () => createTokenData(SOL, processDataSol(dataSolUsdt?.data), USDT)),
+                addData(res, usdtIndex + 4, () => createTokenData(MATIC, processData(data.data[7]), USDT)),
+                addData(res, usdtIndex + 5, () => createTokenData(AVAX, processData(data.data[9]), USDT)),
+                addData(res, usdtIndex + 6, () => createTokenData(CRO, processData(data.data[12]), USDT)),
+                addData(res, usdtIndex + 7, () => createTokenData(HT, processData(data.data[24])/1000000000000, USDT)), // 2 DOWN
+                addData(res, usdtIndex + 8, () => createTokenData("Arbitrum", processData(data.data[26]), USDT)),
+                addData(res, usdtIndex + 9, () => createTokenData(ALGO, processDataAlgo(dataAlgoUsdt?.data), USDT)), // 2 UP
+                addData(res, usdtIndex + 10, () => createTokenData(NEAR, processDataNear(dataPost.data[1], 6), USDT)),
+                addData(res, usdtIndex + 11, () => createTokenData(FTM, processData(data.data[10]), USDT)),
+                addData(res, usdtIndex + 12, () => createTokenData("Optimism", processData(data.data[28]), USDT)),
+                addData(res, usdtIndex + 13, () => createTokenData(AURORA, processDataAurora(data.data[14]), USDT)),
+                addData(res, usdtIndex + 14, () => createTokenData(MOVR, processData(data.data[11]), USDT)),
+                addData(res, usdtIndex + 15, () => createTokenData(GLMR, processData(data.data[16]), USDT)),
 
-            addData(res, usddIndex, () => createTokenData(TRX, processDataTron(tronDataFix(data2.data)[2])/1000000000000000000, USDD)),
+                addData(res, usddIndex, () => createTokenData(TRX, processDataTron(tronDataFix(data2.data)[2])/1000000000000000000, USDD)),
 
-            addData(res, usnIndex, () => createTokenData(NEAR, processDataNear(dataPost.data[2], 18), USN)),
+                addData(res, usnIndex, () => createTokenData(NEAR, processDataNear(dataPost.data[2], 18), USN)),
 
-            //addData(res, 0, () => createTokenData(LUNA, processDataLuna(data.data[27]), UST)),
-            /*addData(res, ustIndex, () => createTokenData(ETH, processData(data.data[18])/1000000000000, UST)),
-            addData(res, ustIndex + 1, () => createTokenData(BNB, processData(data.data[21])/1000000000000, UST)),
-            addData(res, ustIndex + 2, () => createTokenData(AVAX, processData(data.data[19]), UST, Wormhole)),
-            addData(res, ustIndex + 3, () => createTokenData(AVAX, processData(data.data[20]), UST, Axelar)),
-            addData(res, ustIndex + 4, () => createTokenData(FTM, processData(data.data[22]), UST, Wormhole)),
-            addData(res, ustIndex + 5, () => createTokenData(SOL, processDataSol(dataSolUst?.data), UST, Wormhole)),*/
-            
-        ];
-        if (onUpdate) {
-            onUpdate([...res]);
-        }
+                //addData(res, 0, () => createTokenData(LUNA, processDataLuna(data.data[27]), UST)),
+                /*addData(res, ustIndex, () => createTokenData(ETH, processData(data.data[18])/1000000000000, UST)),
+                addData(res, ustIndex + 1, () => createTokenData(BNB, processData(data.data[21])/1000000000000, UST)),
+                addData(res, ustIndex + 2, () => createTokenData(AVAX, processData(data.data[19]), UST, Wormhole)),
+                addData(res, ustIndex + 3, () => createTokenData(AVAX, processData(data.data[20]), UST, Axelar)),
+                addData(res, ustIndex + 4, () => createTokenData(FTM, processData(data.data[22]), UST, Wormhole)),
+                addData(res, ustIndex + 5, () => createTokenData(SOL, processDataSol(dataSolUst?.data), UST, Wormhole)),*/
+            ];
+            if (onUpdate) {
+                onUpdate([...res]);
+            }
+        } catch { }
     }
 }
 const addData = (res, index, processed) => {

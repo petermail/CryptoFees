@@ -22,7 +22,7 @@ export const getChains = () => {
         createChain(USDT, BNB, "0x55d398326f99059ff775485246999027b3197955"),
         createChain(USDT, SOL, "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB"),
         createChain(USDT, MATIC, "0xc2132d05d31c914a87c6611c10748aeb04b58e8f"),
-        createChain(USDT, AVAX, "0xc7198437980c041c805a1edcba50c1ce5db95118"),
+        createChain(USDT, AVAX, "0x9702230a8ea53601f5cd2dc00fdbc13d4df4a8c7"),
         createChain(USDT, FTM, "0x049d68029688eabf473097a2fc38ef61633a3c7a"),
         createChain(USDT, MOVR, "0xb44a9b6905af7c801311e8f4e76932ee959c663c"),
         createChain(USDT, AURORA, "0x4988a896b1227218e4a686fde5eabdcabd91571f"),
