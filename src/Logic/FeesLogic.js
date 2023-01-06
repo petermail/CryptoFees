@@ -103,8 +103,9 @@ export const loadPricesAsync = async () => {
 
 export const loadCryptoComDataAsync = async () => {
     const res = await getCryptoComFeesAsync();
-    //console.log(res.data[0].data.symbols);
-    return convertServerCryptoCom(res.data[0].data.symbols);
+    if (res.data[0].data) {
+        return convertServerCryptoCom(res.data[0].data.symbols);
+    }
 }
 
 export const loadCoinExDataAsync = async () => {
@@ -125,7 +126,9 @@ export const loadHuobiDataAsync = async (coins) => {
     //console.log(res);
     let result = [];
     for (let i = 0; i < res.data.length; ++i) {
-        result.push(processHuobiData(res.data[i]));
+        if (res.data[i].data[0]) {
+            result.push(processHuobiData(res.data[i]));
+        }
     }
     return result;
 }
